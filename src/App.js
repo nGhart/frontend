@@ -6,14 +6,28 @@ import Navigation from './components/navigation/Navigation';
 import Footer from './components/footer/Footer';
 import Login from './pages/login/Login';
 import './styles/global.scss';
+// import {
+//   createBrowserRouter,
+//   Route,
+//   RouterProvider,
+//   Link,
+//   Outlet,
+//   BrowserRouter,
+//   Routes,
+// } from 'react-router-dom';
 import {
   createBrowserRouter,
+  createRoutesFromElements,
   Route,
   RouterProvider,
-  Link,
+  Routes,
   Outlet,
 } from 'react-router-dom';
+
 import Home from './pages/home/Home';
+import RequireAuth from './components/RequireAuth';
+import SignupPage from './components/signup/SignupPage';
+import LogoutPage from './pages/logout/LogoutPage';
 
 const Layout = () => {
   return (
@@ -32,26 +46,27 @@ const Layout = () => {
   );
 };
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Layout />,
-    children: [
-      {
-        path: '/',
-        element: <Home />,
-      },
-      {
-        path: '/animals',
-        element: <AnimalTable />,
-      },
-    ],
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-]);
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <>
+      <Route
+        path="/"
+        element={
+          <RequireAuth>
+            <Layout />
+          </RequireAuth>
+        }
+      >
+        <Route path="/" element={<Home />} />
+        <Route path="animals" element={<AnimalTable />} />
+      </Route>
+      <Route path="/login" element={<Login />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/logout" element={<LogoutPage />} />
+    </>
+  )
+);
+
 function App() {
   return (
     <>

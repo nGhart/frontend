@@ -58,7 +58,7 @@ const animalStore = create((set) => ({
 
   //functions
   getAnimals: async () => {
-    const response = await axios.get('http://localhost:1994/animals');
+    const response = await axios.get('/animals');
     set({ animals: response.data.animals });
   },
   updateCreateAnimals: (e) => {

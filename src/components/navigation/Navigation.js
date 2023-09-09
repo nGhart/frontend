@@ -24,7 +24,7 @@ const Navigation = () => {
           />
           <span>Ama</span>
         </div>
-        <i className="fas fa-cog"></i>
+        <Link to="/logout">Log Out</Link>
       </div>
     </div>
   );
