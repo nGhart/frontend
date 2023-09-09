@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import animalStore from '../stores/store';
-import Animals from '../components/Animals';
-import EditAnimal from '../components/EditAnimal';
-import AddAnimal from '../components/AddAnimal';
+import Animals from '../components/animal/Animals';
+import EditAnimal from '../components/animal/EditAnimal';
+import AddAnimal from '../components/animal/AddAnimal';
 
 const AnimalTable = () => {
   const store = animalStore();
@@ -21,8 +21,3 @@ const AnimalTable = () => {
 };
 
 export default AnimalTable;
-
-// const getAnimals = async () => {
-//   const response = await axios.get('http://localhost:1994/animals');
-//   setAnimals(response.data.animals);
-// };

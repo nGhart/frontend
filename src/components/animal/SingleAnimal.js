@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import animalStore from '../stores/store';
+import animalStore from '../../stores/store';
 import './animal.css';
+
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const SingleAnimal = ({ item }) => {
   const store = animalStore((store) => {
@@ -11,6 +15,10 @@ const SingleAnimal = ({ item }) => {
   const showAnimalDetails = (animal) => {
     setSelectedAnimal(animal);
   };
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
       <div
@@ -24,7 +32,6 @@ const SingleAnimal = ({ item }) => {
             <h2>Animal Details</h2>
             <p>Name: {selectedAnimal.name}</p>
             <p>Breed: {selectedAnimal.breed}</p>
-            {/* Include other properties here */}
             <button onClick={() => setSelectedAnimal(null)}>Close</button>
           </div>
         )}

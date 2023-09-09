@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import animalStore from '../stores/store';
+import animalStore from '../../stores/store';
 import Table from 'react-bootstrap/Table';
 import SingleAnimal from './SingleAnimal';
 

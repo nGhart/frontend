@@ -37,7 +37,19 @@ code {
 .font6 {
   font-family: 'Yatra One', cursive;
 }
-
+.cText {
+  text-align: center;
+}
+.jBetween {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  width: 100%;
+}
+.between {
+  display: flex;
+  justify-content: space-between;
+}
 .around {
   display: flex;
   width: 100%;
