@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
 import Nav from 'react-bootstrap/Nav';
-import { Link } from 'react-router-dom';
-import DoePage from '../doePage/DoePage';
-import BuckPage from '../buckPage/BuckPage';
-import MatingPage from '../matingPage/MatingPage';
+import { Link, Outlet } from 'react-router-dom';
 
 const BreedingPage = () => {
   return (
     <div style={{}}>
       <h1>Breeding Records</h1>
-      <DoePage />
-      <BuckPage />
-      <MatingPage />
       <Nav
+        justify
         variant="tabs"
         defaultActiveKey="doe"
-        className="justify-content-center"
+        className="justify-content"
       >
         <Nav.Item>
           <Link to="doe">Doe</Link>
@@ -27,6 +22,9 @@ const BreedingPage = () => {
           <Link to="mating">Mating</Link>
         </Nav.Item>
       </Nav>
+      <div>
+        <Outlet />
+      </div>
     </div>
   );
 };

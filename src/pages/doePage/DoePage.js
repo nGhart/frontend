@@ -2,9 +2,7 @@ import React from 'react';
 
 const DoePage = () => {
   return (
-    <div
-      style={{ marginTop: '500px', backgroundColor: 'red', height: '200px' }}
-    >
+    <div style={{}}>
       DoePage
       <p>
         1. Solid Colors: Solid colors tend to work well in photoshoots because

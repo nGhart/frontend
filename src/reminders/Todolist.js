@@ -33,6 +33,7 @@ function Todolist() {
     });
     setTodos(updatedTodos);
   };
+  console.log(todos);
   return (
     <div>
       <h5 className="toTitle">To Do List</h5>

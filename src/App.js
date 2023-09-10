@@ -60,11 +60,20 @@ const router = createBrowserRouter(
         <Route path="/" element={<Home />} />
         <Route path="animals" element={<AnimalTable />} />
         <Route path="employee" element={<EmployeePage />} />
+        {/* <Route path="breeding" element={<BreedingPage />}>
+          <Route path="doe" element={<DoePage />} />
+          <Route path="buck" element={<BuckPage />} />
+          <Route path="mating" element={<MatingPage />} />
+        </Route> */}
+
         <Route path="breeding" element={<BreedingPage />}>
+          {/* Render a different component based on the route */}
+          <Route index element={<DoePage />} />
           <Route path="doe" element={<DoePage />} />
           <Route path="buck" element={<BuckPage />} />
           <Route path="mating" element={<MatingPage />} />
         </Route>
+
         <Route path="feed" element={<FeedPage />} />
         <Route path="inventory" element={<InventoryPage />} />
         <Route path="contact" element={<ContactPage />} />
