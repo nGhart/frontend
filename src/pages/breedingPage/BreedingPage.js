@@ -3,11 +3,20 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Stack from 'react-bootstrap/Stack';
+import Loading from '../../components/Loading';
 
 const BreedingPage = () => {
+  const [loading, setLoading] = useState(true);
+  const [errorPage, setErrorPage] = useState(false);
+  if (loading) {
+    return <Loading />;
+  }
+  // if (error) {
+  //   return;
+  // }
   return (
-    <>
-      <h1>Breeding pAge</h1>
+    <div style={{ backgroundColor: 'red' }}>
+      <h1>Breeding Records</h1>
       {/* <Container
         style={{
           marginTop: '50px',
@@ -40,7 +49,7 @@ const BreedingPage = () => {
           </Stack>
         </div>
       </Container> */}
-    </>
+    </div>
   );
 };
 
