@@ -24,6 +24,9 @@ import FeedPage from './pages/feedPage/FeedPage';
 import InventoryPage from './pages/inventoryPage/InventoryPage';
 import ContactPage from './pages/contactPage/ContactPage';
 import TransactionPage from './pages/TransactionPage/TransactionPage';
+import DoePage from './pages/doePage/DoePage';
+import BuckPage from './pages/buckPage/BuckPage';
+import MatingPage from './pages/matingPage/MatingPage';
 
 //check styles here, theres a position relative
 const Layout = () => {
@@ -57,7 +60,11 @@ const router = createBrowserRouter(
         <Route path="/" element={<Home />} />
         <Route path="animals" element={<AnimalTable />} />
         <Route path="employee" element={<EmployeePage />} />
-        <Route path="breeding" element={<BreedingPage />} />
+        <Route path="breeding" element={<BreedingPage />}>
+          <Route path="doe" element={<DoePage />} />
+          <Route path="buck" element={<BuckPage />} />
+          <Route path="mating" element={<MatingPage />} />
+        </Route>
         <Route path="feed" element={<FeedPage />} />
         <Route path="inventory" element={<InventoryPage />} />
         <Route path="contact" element={<ContactPage />} />
