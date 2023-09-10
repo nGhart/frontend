@@ -1,3 +1,32 @@
+* {
+  position: relative;
+}
 body {
   background-color: rgb(26, 115, 96);
+}
+.actionIcons {
+  background: none;
+  border: none;
+}
+.fa-eye {
+  color: rgb(105, 106, 93);
+}
+.fa-edit {
+  color: rgb(105, 106, 93);
+}
+.fa-trash-alt {
+  color: rgb(216, 17, 17);
+}
+.updateForm {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(26, 115, 96);
+  height: 100%;
+  z-index: 5;
+  color: black;
+  padding: 20px;
+}
+label {
+  margin-right: 20px;
 }

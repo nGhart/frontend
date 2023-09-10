@@ -10,22 +10,22 @@ const Menu = () => {
           <i className="fas fa-home"></i>
           <span className="listItemTitle">Animal Records</span>
         </Link>
-        <Link to="/" className="listItem">
+        <Link to="/employee" className="listItem">
           <i className="fas fa-user-alt"></i>
-          <span className="listItemTitle">Labour Records</span>
+          <span className="listItemTitle">Employee Records</span>
         </Link>
-        <Link to="/" className="listItem">
+        <Link to="/feed" className="listItem">
           <i className="fas fa-user-alt"></i>
           <span className="listItemTitle">Feed Records</span>
         </Link>
-        <Link to="/" className="listItem">
+        <Link to="/inventory" className="listItem">
           <i className="fas fa-user-alt"></i>
           <span className="listItemTitle">Inventory</span>
         </Link>
       </div>
       <div className="item">
         <span className="title">Breeding</span>
-        <Link to="/" className="listItem">
+        <Link to="/breeding" className="listItem">
           <i className="fas fa-user-alt"></i>
 
           <span className="listItemTitle">Breeding Records</span>
@@ -53,7 +53,7 @@ const Menu = () => {
       </div>
       <div className="item">
         <span className="title">Finance</span>
-        <Link to="/" className="listItem">
+        <Link to="transaction" className="listItem">
           <i className="fas fa-home"></i>
           <span className="listItemTitle">Expense Manager</span>
         </Link>
@@ -64,7 +64,7 @@ const Menu = () => {
       </div>
       <div className="item">
         <span className="title">Others</span>
-        <Link to="/" className="listItem">
+        <Link to="/contact" className="listItem">
           <i className="fas fa-home"></i>
           <span className="listItemTitle">Contacts</span>
         </Link>

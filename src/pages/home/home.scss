@@ -11,13 +11,14 @@
   }
   .box4 {
     grid-column: span 1;
-    grid-row: span 2;
+    grid-row: span 3;
+    padding: 0;
   }
   .box5 {
-    grid-column: span 2;
+    grid-column: span 1;
     grid-row: span 2;
   }
-  .box7 {
+  .box8 {
     grid-column: span 2;
     grid-row: span 1;
   }

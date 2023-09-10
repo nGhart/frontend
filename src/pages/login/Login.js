@@ -3,9 +3,12 @@ import './login.scss';
 
 const Login = () => {
   return (
-    <div>
-      <h1>Log in</h1>
-      <LoginForm />
+    <div className="startPage">
+      <div className="startImage">hi</div>
+      <div className="startForm">
+        <h1>Log in</h1>
+        <LoginForm />
+      </div>
     </div>
   );
 };

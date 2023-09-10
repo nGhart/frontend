@@ -7,18 +7,7 @@ const EditAnimal = () => {
   return (
     <div>
       {store.updateForm._id && (
-        <section
-          style={{
-            position: 'fixed',
-            top: 0,
-            backgroundColor: 'rgb(26, 115, 96)',
-            left: 0,
-            height: '100%',
-            zIndex: 5,
-            color: 'black',
-            padding: '20px',
-          }}
-        >
+        <section className="updateForm">
           <h1>Update</h1>
           <Form
             style={{ display: 'flex', flexWrap: 'wrap' }}

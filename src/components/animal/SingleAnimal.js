@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-const SingleAnimal = ({ item }) => {
+const SingleAnimal = ({ item, props }) => {
   const store = animalStore((store) => {
     return { editAnimal: store.editAnimal, deleteAnimal: store.deleteAnimal };
   });
@@ -21,21 +21,6 @@ const SingleAnimal = ({ item }) => {
   const handleShow = () => setShow(true);
   return (
     <>
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
-      >
-        {selectedAnimal && (
-          <div className="animal-details">
-            <h2>Animal Details</h2>
-            <p>Name: {selectedAnimal.name}</p>
-            <p>Breed: {selectedAnimal.breed}</p>
-            <button onClick={() => setSelectedAnimal(null)}>Close</button>
-          </div>
-        )}
-      </div>
       <tr key={item._id}>
         <td>{item.name}</td>
         <td>{item.breed}</td>
@@ -46,16 +31,25 @@ const SingleAnimal = ({ item }) => {
         <td>{item.weaning}</td>
         <td>{item.weightCurrent}</td>
         <td>
-          <div className="around">
-            <button onClick={() => showAnimalDetails(item)}>
+          <div className="around actionIcons">
+            <button
+              className="actionIcons"
+              onClick={() => showAnimalDetails(item)}
+            >
               <i className="fas fa-eye"></i>
             </button>
 
-            <button onClick={() => store.editAnimal(item)}>
+            <button
+              className="actionIcons"
+              onClick={() => store.editAnimal(item)}
+            >
               <i className="fas fa-edit"></i>
             </button>
 
-            <button onClick={() => store.deleteAnimal(item._id)}>
+            <button
+              className="actionIcons"
+              onClick={() => store.deleteAnimal(item._id)}
+            >
               <i className="fas fa-trash-alt"></i>
             </button>
           </div>

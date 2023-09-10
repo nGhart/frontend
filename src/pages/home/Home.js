@@ -1,5 +1,6 @@
 import ChartBox from '../../components/chartbox/ChartBox';
 import './home.scss';
+import ReminderPage from '../../components/ReminderPage/ReminderPage';
 
 const Home = () => {
   return (
@@ -9,10 +10,13 @@ const Home = () => {
       </div>
       <div className="box box2">2</div>
       <div className="box box3">3</div>
-      <div className="box box4">4</div>
+      <div className="box box4">
+        <ReminderPage />
+      </div>
       <div className="box box5">5</div>
       <div className="box box6">6</div>
       <div className="box box7">7</div>
+      <div className="box box8">8</div>
     </div>
   );
 };

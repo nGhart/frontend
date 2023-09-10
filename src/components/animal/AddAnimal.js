@@ -3,25 +3,60 @@ import Form from 'react-bootstrap/Form';
 import animalStore from '../../stores/store';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import './animal.css';
 
 const AddAnimal = () => {
   const store = animalStore();
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  // const handleClose = () => setShow(false);
+  // const handleShow = () => setShow(true);
+
+  // const [show, setShow] = useState(false);
+
+  const modalClose = () => setShow(false);
+  const modalShow = () => setShow(true);
   return (
     <div>
-      <section>
-        <Modal show={show} onHide={handleClose} animation={false}>
-          <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            <h1>Add Animal</h1>
-            <Form
-              onSubmit={store.handleAddAnimal}
-              style={{ display: 'flex', flexWrap: 'wrap' }}
+      {/* <button onClick={handleShow}></button> */}
+
+      {/* <Modal show={show} onHide={handleClose} animation={false}>
+        <Modal.Body>
+          
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal> */}
+
+      <button
+        onClick={modalShow}
+        style={{
+          border: 'none',
+          borderRadius: '4px',
+          backgroundColor: 'rgb(231, 226, 212)',
+          padding: '5px',
+          margin: '0 auto 5px',
+        }}
+      >
+        Add Animal
+      </button>
+      <Modal fullscreen show={show} onHide={modalClose}>
+        <Modal.Header closeButton>
+          <h1>Add Animal</h1>
+          <Form onSubmit={store.handleAddAnimal}>
+            <div
+              style={{
+                display: 'grid',
+                gap: '20px',
+                gridTemplateColumns: 'repeat(5, 1fr)',
+                gridAutoRows: 'minmax(20px, auto)',
+              }}
             >
               <fieldset>
                 <Form.Group>
@@ -78,7 +113,7 @@ const AddAnimal = () => {
                     type="radio"
                     id="bred"
                     onChange={store.updateCreateAnimals}
-                    value="true"
+                    value="Bred on Farm"
                     checked={store.createAnimal.bred === 'Bred on Farm'}
                   />
                   <Form.Check
@@ -87,7 +122,7 @@ const AddAnimal = () => {
                     name="bred"
                     type="radio"
                     id="purchased"
-                    value="false"
+                    value="Purchased"
                     checked={store.createAnimal.bred === 'Purchased'}
                     onChange={store.updateCreateAnimals}
                   />
@@ -267,23 +302,36 @@ const AddAnimal = () => {
                   />
                 </Form.Group>
               </fieldset>
-              <button type="submit">Add</button>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
-        </Modal>
-      </section>
+            </div>
+            <div>
+              <button variant="secondary" onClick={modalClose}>
+                Cancel
+              </button>
+              <button
+                style={{
+                  border: 'none',
+                  borderRadius: '4px',
+                  backgroundColor: 'rgb(231, 226, 212)',
+                  padding: '5px',
+                  margin: '0 auto 5px',
+                }}
+                type="submit"
+              >
+                Add
+              </button>
 
-      <button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </button>
+              {/* <button variant="primary">Save changes</button> */}
+            </div>
+          </Form>
+        </Modal.Header>
+
+        <Modal.Footer>
+          <button variant="secondary" onClick={modalClose}>
+            Close Modal
+          </button>
+          <button variant="primary">Save changes</button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

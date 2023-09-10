@@ -3,12 +3,11 @@ import animalStore from '../../stores/store';
 import Table from 'react-bootstrap/Table';
 import SingleAnimal from './SingleAnimal';
 
-const Animals = () => {
+const Animals = (props) => {
   const store = animalStore();
   const [selectedAnimal, setSelectedAnimal] = useState(null);
   return (
     <div>
-      <h1 className="font6">Animal Records</h1>
       {selectedAnimal && (
         <div className="animal-details">
           <h2>Animal Details</h2>
