@@ -1,85 +1,18 @@
 import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-export const initialState = {
-  transactions: [
-    {
-      date: '2023-12-09',
-      name: 'Waakye',
-      category: 'Food',
-      price: 20.0,
-      payment: 'Cash',
-      transaction: 'Expense',
-      id: 'iuiu3',
-    },
-    {
-      date: '2023-12-09',
-      name: 'Water',
-      category: 'Utilities',
-      price: 50,
-      payment: 'Mobile Money',
-      transaction: 'Expense',
-      id: '4#32278',
-    },
-    {
-      date: '2023-12-09',
-      name: 'Makola',
-      category: 'Transport',
-      price: 9,
-      payment: 'Cash',
-      transaction: 'Expense',
-      id: 'iuiu*878',
-    },
-    {
-      date: '2023-12-10',
-      name: 'Uber',
-      category: 'Transport',
-      price: 21,
-      payment: 'Cash',
-      transaction: 'Expense',
-      id: 'i7*878',
-    },
-    {
-      date: '2023-12-09',
-      name: 'Little Mermaid',
-      category: 'Entertainment',
-      price: 100,
-      payment: 'Cash',
-      transaction: 'Expense',
-      id: 'iuiugty2',
-    },
-    {
-      date: '2023-12-09',
-      name: 'Salary',
-      category: 'Salary',
-      price: 1500,
-      payment: 'Cash',
-      transaction: 'Income',
-      id: 'wrew43227@#8',
-    },
-    // {
-    //   date: '2023-12-09',
-    //   name: 'rent',
-    //   category: 'Household',
-    //   price: 500,
-    //   payment: 'Cash',
-    //   transaction: 'Expense',
-    //   id: 'iuiu34327#@erew8',
-    // },
-    {
-      date: '2023-12-09',
-      name: 'Interest',
-      category: 'Investment',
-      price: 500,
-      payment: 'Cash',
-      transaction: 'Income',
-      id: 'iuiwe87#@8',
-    },
-  ],
-};
 const transactionSlice = createSlice({
   name: 'transactions',
-  initialState,
+  initialState: {
+    transactions: [],
+    totalIncome: 0,
+    totalExpense: 0,
+    balance: 0,
+  },
   reducers: {
+    setTransactions: (state, action) => {
+      state.transactions = action.payload;
+    },
     addTransaction: (state, action) => {
       state.transactions = [...state.transactions, action.payload];
     },
@@ -98,31 +31,70 @@ const transactionSlice = createSlice({
         return item;
       });
     },
-    getEachTotal: (state) => {
-      let totalIncome = 0;
-      let totalExpense = 0;
+    // getEachTotal: (state) => {
+    //   let totalIncome = 0;
+    //   let totalExpense = 0;
 
-      state.transactions.map((item) =>
-        item.transaction === 'Expense'
-          ? (totalExpense = totalExpense + Number(item.price))
-          : (totalIncome = totalIncome + Number(item.price))
-      );
+    //   state.transactions.transactions.map((item) =>
+    //     item.transactionType === 'Expense'
+    //       ? (totalExpense = totalExpense + Number(item.price))
+    //       : (totalIncome = totalIncome + Number(item.price))
+    //   );
 
-      state.totalIncome = totalIncome.toFixed(2);
-      state.totalExpense = totalExpense.toFixed(2);
-    },
-    getBalance: (state) => {
-      let balance;
-      balance = state.totalIncome - state.totalExpense;
-      state.balance = balance.toFixed(2);
-    },
+    //   state.totalIncome = totalIncome.toFixed(2);
+    //   state.totalExpense = totalExpense.toFixed(2);
+    // },
+    // getBalance: (state) => {
+    //   let balance;
+    //   balance = state.totalIncome - state.totalExpense;
+    //   state.balance = balance.toFixed(2);
+    // },
+
+    // getEachTotal: (state) => {
+    //   let totalIncome = 0;
+    //   let totalExpense = 0;
+
+    //   state.transactions.forEach((item) => {
+    //     if (item.transactionType === 'Expense') {
+    //       totalExpense += Number(item.price);
+    //     } else {
+    //       totalIncome += Number(item.price);
+    //     }
+    //   });
+
+    //   state.totalIncome = totalIncome.toFixed(2);
+    //   state.totalExpense = totalExpense.toFixed(2);
+    //   console.log(state.totalExpense);
+    // },
+    // getBalance: (state) => {
+    //   const balance = state.totalIncome - state.totalExpense;
+    //   state.balance = balance.toFixed(2);
+    // },
   },
 });
 export const {
+  setTransactions,
   addTransaction,
   deleteTransaction,
   editTransaction,
   getEachTotal,
   getBalance,
 } = transactionSlice.actions;
+// export const fetchTransactions = () => async (dispatch) => {
+//   try {
+//     const response = await axios.get('http://localhost:1994/transactions');
+//     dispatch(setTransactions(response.data));
+//   } catch (error) {
+//     console.error('Error fetching transactions:', error);
+//   }
+// };
+export const fetchTransactions = () => async (dispatch) => {
+  try {
+    const response = await axios.get('http://localhost:1994/transactions');
+    dispatch(setTransactions(response.data));
+  } catch (error) {
+    console.error('Error fetching transactions:', error);
+  }
+};
+
 export default transactionSlice.reducer;

@@ -58,7 +58,9 @@ const router = createBrowserRouter(
         }
       >
         <Route path="/" element={<Home />} />
-        <Route path="animals" element={<AnimalTable />} />
+        <Route path="animals" element={<AnimalTable />}>
+          <Route path="animals/:id" element={<AnimalTable />} />
+        </Route>
         <Route path="employee" element={<EmployeePage />} />
         {/* <Route path="breeding" element={<BreedingPage />}>
           <Route path="doe" element={<DoePage />} />

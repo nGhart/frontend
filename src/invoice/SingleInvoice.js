@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Todoform from './Todoform';
+import InvoiceForm from './InvoiceForm';
 
-const Todo = ({ todos, completeTodo, removeTodo, updatedTodos }) => {
-  const [edit, editTodo] = useState({
+const SingleInvoice = ({ invoices, removeInvoice, updatedInvoices }) => {
+  const [edit, editInvoice] = useState({
     id: null,
     value: '',
   });
   const submitUpdate = (value) => {
-    updatedTodos(edit.id, value);
+    updatedTodos(invoice.id, value);
     editTodo({
       id: null,
       value: '',
@@ -55,5 +55,4 @@ const Todo = ({ todos, completeTodo, removeTodo, updatedTodos }) => {
   );
 };
 
-export default Todo;
-//<span className='checkbox'>✖</span>
+export default SingleInvoice;

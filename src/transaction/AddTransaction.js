@@ -1,5 +1,4 @@
 import React from 'react';
-import { v1 as uuid } from 'uuid';
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -7,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import { useDispatch } from 'react-redux';
 import { addTransaction } from '../appSlice/appSlice';
 import Row from 'react-bootstrap/Row';
+import axios from 'axios';
 
 const AddTransaction = () => {
   const [show, setShow] = useState(false);
@@ -19,7 +19,7 @@ const AddTransaction = () => {
     category: '',
     price: '',
     payment: 'Cash',
-    transaction: 'Expense',
+    transactionType: 'Expense',
   });
   const dispatch = useDispatch();
 
@@ -28,29 +28,37 @@ const AddTransaction = () => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const newTransaction = {
-      date: state.date,
-      name: state.name,
-      category: state.category,
-      price: state.price,
-      payment: state.payment,
-      transaction: state.transaction,
-      id: uuid(),
-    };
-    dispatch(addTransaction(newTransaction));
-    setState({
-      date: '',
-      name: '',
-      category: '',
-      price: '',
-      payment: '',
-      transaction: '',
-    });
-    // console.log(state.price);
-    // console.log(typeof state.price);
-    handleClose();
+  const handleSubmit = async (e) => {
+    try {
+      e.preventDefault();
+
+      const newTransaction = {
+        date: state.date,
+        name: state.name,
+        category: state.category,
+        price: state.price,
+        payment: state.payment,
+        transactionType: state.transactionType,
+      };
+      const response = await axios.post(
+        'http://localhost/transactions',
+        newTransaction
+      );
+      dispatch(addTransaction(newTransaction));
+      setState({
+        date: '',
+        name: '',
+        category: '',
+        price: '',
+        payment: '',
+        transactionType: '',
+      });
+      // console.log(state.price);
+      // console.log(typeof state.price);
+      handleClose();
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -106,21 +114,21 @@ const AddTransaction = () => {
             <Form.Check
               inline
               label="Expense"
-              name="transaction"
+              name="transactionType"
               type="radio"
               id="Expense"
               value="Expense"
-              checked={state.transaction === 'Expense'}
+              checked={state.transactionType === 'Expense'}
               onChange={handleChange}
             />
             <Form.Check
               inline
               label="Income"
-              name="transaction"
+              name="transactionType"
               type="radio"
               id="Income"
               value="Income"
-              checked={state.transaction === 'Income'}
+              checked={state.transactionType === 'Income'}
               onChange={handleChange}
             />
           </Form.Group>

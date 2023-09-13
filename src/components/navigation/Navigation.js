@@ -10,10 +10,10 @@ const Navigation = () => {
         </Link>
       </div>
       <div className="icons">
-        <i className="fas fa-search"></i>
-        <i className="fas fa-grip-horizontal"></i>
-        <i className="fas fa-expand"></i>
-        <div className="notification">
+        <i className="fas fa-search icon"></i>
+        <i className="fas fa-grip-horizontal icon"></i>
+        <i className="fas fa-expand icon"></i>
+        <div className="notification icon">
           <i className="fas fa-bell"></i>
           <span>1</span>
         </div>

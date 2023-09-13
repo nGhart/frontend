@@ -6,22 +6,23 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const TransactionSummary = () => {
-  const state = useSelector((state) => {
-    return state.userReducer;
-  });
-  const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getEachTotal());
-    dispatch(getBalance());
-  }, [dispatch, state.transactions]);
-  let lastTransactions;
-  const getLastTransactions = () => {
-    lastTransactions = state.transactions.slice(-3);
-  };
-  getLastTransactions();
+  // const state = useSelector((state) => {
+  //   return state.userReducer;
+  // });
+  // const dispatch = useDispatch();
+  // useEffect(() => {
+  //   dispatch(getEachTotal());
+  //   dispatch(getBalance());
+  // }, [dispatch, state.transactions]);
+  // let lastTransactions;
+  // const getLastTransactions = () => {
+  //   lastTransactions = state.transactions.slice(-3);
+  // };
+  // getLastTransactions();
   return (
     <>
-      <Container fluid style={{ fontFamily: 'Carter One' }}>
+      <h1>h1</h1>
+      {/* <Container fluid style={{ fontFamily: 'Carter One' }}>
         <Row style={{ display: 'flex', justifyContent: 'center' }}>
           <Col
             //md={{ span: 6, offset: 3 }}
@@ -88,10 +89,10 @@ const TransactionSummary = () => {
                 <h5>Expense: </h5>
                 <h4 style={{ color: 'red' }}>GHC {state.totalExpense}</h4>
               </section>
-            </div> */}
+            </div> 
           </Col>
         </Row>
-        {/* <Row
+         <Row
           style={{ display: 'flex', justifyContent: 'center', margin: '1px' }}
         >
           <Col
@@ -107,7 +108,7 @@ const TransactionSummary = () => {
             {lastTransactions.map((item) => {
               let colourTransaction;
               colourTransaction =
-                item.transaction === 'Income'
+                item.transactionType === 'Income'
                   ? (colourTransaction = 'green')
                   : (colourTransaction = 'red');
               return (
@@ -138,7 +139,7 @@ const TransactionSummary = () => {
                           margin: '0',
                         }}
                       >
-                        {item.transaction}
+                        {item.transactionType}
                       </p>
                     </div>
                   </Row>
@@ -178,11 +179,11 @@ const TransactionSummary = () => {
               );
             })}
           </Col>
-        </Row> */}
+        </Row> 
         <Row
-          style={{ display: 'flex', justifyContent: 'center', margin: '1px' }}
-        >
-          <Col
+        //   style={{ display: 'flex', justifyContent: 'center', margin: '1px' }}
+        // >
+        //   <Col
           // md={{ span: 6, offset: 3 }}
           // style={{
           //   border: '2px solid grey',
@@ -190,9 +191,9 @@ const TransactionSummary = () => {
           //   borderRadius: '10px',
           //   textAlign: 'center',
           // }}
-          ></Col>
-        </Row>
-      </Container>
+      //     ></Col>
+      //   </Row>
+      // </Container> */}
     </>
   );
 };

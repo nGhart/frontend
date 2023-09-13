@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-//import { v1 as uuid } from 'uuid';
 
-function Todoform(props) {
+const InvoiceForm = (props) => {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');
   const inputRef = useRef(null);
   useEffect(() => {
@@ -54,6 +53,5 @@ function Todoform(props) {
       )}
     </form>
   );
-}
-
-export default Todoform;
+};
+export default InvoiceForm;
