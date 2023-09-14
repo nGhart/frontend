@@ -31,7 +31,7 @@ export default invoicesSlice.reducer;
 
 // import axios from 'axios';
 
-// // Replace with your backend URL
+// Replace with your backend URL
 // const backendUrl = 'http://localhost:1994/reminders';
 
 // export const addNote = (note) => async (dispatch) => {

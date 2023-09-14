@@ -1,77 +1,50 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getBalance, getEachTotal } from '../../appSlice/appSlice';
+import { getBalance, getEachTotal } from '../../appSlice/transactionSlice';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-const TransactionSummary = () => {
-  // const state = useSelector((state) => {
-  //   return state.userReducer;
-  // });
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getEachTotal());
-  //   dispatch(getBalance());
-  // }, [dispatch, state.transactions]);
-  // let lastTransactions;
-  // const getLastTransactions = () => {
-  //   lastTransactions = state.transactions.slice(-3);
-  // };
-  // getLastTransactions();
+const HomePage = () => {
+  const state = useSelector((state) => {
+    return state.userReducer;
+  });
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getEachTotal());
+    dispatch(getBalance());
+  }, [dispatch, state.transactions]);
+  let lastTransactions;
+  const getLastTransactions = () => {
+    lastTransactions = state.transactions.slice(-3);
+  };
+  getLastTransactions();
   return (
     <>
-      <h1>h1</h1>
-      {/* <Container fluid style={{ fontFamily: 'Carter One' }}>
-        <Row style={{ display: 'flex', justifyContent: 'center' }}>
+      <Container fluid style={{ fontFamily: 'Carter One', marginTop: '55px' }}>
+        <Row
+          style={{ display: 'flex', justifyContent: 'center', margin: '1px' }}
+        >
           <Col
-            //md={{ span: 6, offset: 3 }}
+            md={{ span: 6, offset: 3 }}
             style={{
-              // border: '2px solid grey',
-              // margin: '20px',
+              border: '2px solid grey',
+              margin: '20px',
               borderRadius: '10px',
               textAlign: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              height: '180px',
             }}
           >
+            <h3 style={{ textAlign: 'center', padding: '10px' }}>
+              Balance:{' '}
+              <span
+                style={{
+                  color: `${state.balance < 0 ? 'red' : 'green'}`,
+                }}
+              >
+                {state.balance}
+              </span>
+            </h3>
             <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                backgroundColor: 'grey',
-                height: '20%',
-                width: '100%',
-                justifyContent: 'space-evenly',
-              }}
-            >
-              <h4 style={{ textAlign: 'center', padding: '10px' }}>
-                Balance:{' '}
-                <span
-                  style={{
-                    color: `${state.balance < 0 ? 'red' : 'green'}`,
-                  }}
-                >
-                  {state.balance}
-                </span>
-              </h4>
-              <h5>
-                Income:
-                <span style={{ color: 'green' }}> GHC {state.totalIncome}</span>
-              </h5>
-              <h5>
-                Expense:
-                <span style={{ color: 'red' }}>GHC {state.totalExpense}</span>
-              </h5>
-            </div>
-            <div
-              style={{ width: '100%', height: '80%', backgroundColor: 'pink' }}
-            >
-              <h6>graph</h6>
-            </div>
-            {/*<div
               style={{
                 width: '100%',
                 display: 'flex',
@@ -89,10 +62,10 @@ const TransactionSummary = () => {
                 <h5>Expense: </h5>
                 <h4 style={{ color: 'red' }}>GHC {state.totalExpense}</h4>
               </section>
-            </div> 
+            </div>
           </Col>
         </Row>
-         <Row
+        <Row
           style={{ display: 'flex', justifyContent: 'center', margin: '1px' }}
         >
           <Col
@@ -108,7 +81,7 @@ const TransactionSummary = () => {
             {lastTransactions.map((item) => {
               let colourTransaction;
               colourTransaction =
-                item.transactionType === 'Income'
+                item.transaction === 'Income'
                   ? (colourTransaction = 'green')
                   : (colourTransaction = 'red');
               return (
@@ -139,7 +112,7 @@ const TransactionSummary = () => {
                           margin: '0',
                         }}
                       >
-                        {item.transactionType}
+                        {item.transaction}
                       </p>
                     </div>
                   </Row>
@@ -179,23 +152,10 @@ const TransactionSummary = () => {
               );
             })}
           </Col>
-        </Row> 
-        <Row
-        //   style={{ display: 'flex', justifyContent: 'center', margin: '1px' }}
-        // >
-        //   <Col
-          // md={{ span: 6, offset: 3 }}
-          // style={{
-          //   border: '2px solid grey',
-          //   margin: '20px',
-          //   borderRadius: '10px',
-          //   textAlign: 'center',
-          // }}
-      //     ></Col>
-      //   </Row>
-      // </Container> */}
+        </Row>
+      </Container>
     </>
   );
 };
 
-export default TransactionSummary;
+export default HomePage;

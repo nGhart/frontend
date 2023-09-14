@@ -1,7 +1,7 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import AddTransaction from '../../transaction/AddTransaction';
-import Transactions from '../../transaction/Transactions';
+import AddTransaction from '../../contents/transaction/AddTransaction';
+import Transactions from '../../contents/transaction/Transactions';
 
 const HomePage = () => {
   return (

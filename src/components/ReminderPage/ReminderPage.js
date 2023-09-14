@@ -15,7 +15,7 @@
 // export default ReminderPage;
 import React from 'react';
 import './ReminderPage.scss';
-import Todolist from '../../reminders/Todolist';
+import Todolist from '../../contents/reminders/Todolist';
 import { useSelector } from 'react-redux';
 
 function ReminderPage() {

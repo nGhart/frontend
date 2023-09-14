@@ -2,7 +2,7 @@ import React from 'react';
 import Todo from './Todo';
 import Todoform from './Todoform';
 import { useSelector, useDispatch } from 'react-redux';
-import { addNote, deleteNote, editNote } from '../appSlice/reminderSlice'; // Adjust the import path
+import { addNote, deleteNote, editNote } from '../../appSlice/reminderSlice'; // Adjust the import path
 
 function Todolist() {
   const todos = useSelector((state) => state.todosReducer.todos);

@@ -150,7 +150,9 @@ const animalStore = create((set) => ({
           },
         };
       });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   },
   editAnimal: (item) => {
     try {

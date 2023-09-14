@@ -38,7 +38,7 @@ const Menu = () => {
       </div>
       <div className="item">
         <span className="title">Health</span>
-        <Link to="/" className="listItem">
+        <Link to="health" className="listItem">
           <i className="fas fa-user-alt"></i>
           <span className="listItemTitle">Health Records</span>
         </Link>
@@ -57,7 +57,7 @@ const Menu = () => {
           <i className="fas fa-home"></i>
           <span className="listItemTitle">Expense Manager</span>
         </Link>
-        <Link to="/" className="listItem">
+        <Link to="invoice" className="listItem">
           <i className="fas fa-user-alt"></i>
           <span className="listItemTitle">Invoice</span>
         </Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteTransaction } from '../appSlice/appSlice';
+import { deleteTransaction } from '../../appSlice/transactionSlice';
 import EditTransaction from './EditTransaction';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -17,7 +17,7 @@ const SingleTransaction = (props) => {
   return (
     <Col
       xs={11}
-      // lg={{ span: 6, offset: 3 }}
+      lg={{ span: 6, offset: 3 }}
       key={props.user.id}
       style={{
         margin: '5px',

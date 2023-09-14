@@ -1,5 +1,6 @@
 import React from 'react';
 import Nav from 'react-bootstrap/Nav';
+import { Link, Outlet } from 'react-router-dom';
 
 const HealthPage = () => {
   return (
@@ -13,13 +14,13 @@ const HealthPage = () => {
           className="justify-content"
         >
           <Nav.Item>
-            <Link to="doe">Doe</Link>
+            <Link to="disease">Disease</Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="buck">Buck</Link>
+            <Link to="buck">Quarantine</Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="mating">Mating</Link>
+            <Link to="mating">Vaccination</Link>
           </Nav.Item>
         </Nav>
         <div>

@@ -1,12 +1,15 @@
 import React from 'react';
-import authStore from '../stores/authStore';
+import MainScreen from './mainScreen/MainScreen';
 
-const ErrorPage = () => {
-  const store = authStore();
+import Alert from 'react-bootstrap/Alert';
+const ErrorPage = ({ variant = 'info', children }) => {
   return (
     <>
-      <div>ErrorPage</div>
-      <h1>{store.error.message}</h1>
+      <MainScreen title="Error">
+        <Alert className="errorContainer">
+          <h1>{children}</h1>
+        </Alert>
+      </MainScreen>
     </>
   );
 };

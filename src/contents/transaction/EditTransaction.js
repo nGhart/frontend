@@ -1,103 +1,62 @@
-import React from 'react';
-import { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTransaction } from '../appSlice/appSlice';
-import Row from 'react-bootstrap/Row';
-import axios from 'axios';
+import { editTransaction } from '../../appSlice/transactionSlice';
+import { Modal, Form, Button } from 'react-bootstrap';
 
-const AddTransaction = () => {
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [state, setState] = useState({
-    date: '',
-    name: '',
-    category: '',
-    price: '',
-    payment: 'Cash',
-    transactionType: 'Expense',
+const EditTransaction = (props) => {
+  const [transactions, setTransactions] = useState({
+    name: props.user.name,
+    id: props.user.id,
+    date: props.user.date,
+    category: props.user.category,
+    price: props.user.price,
+    payment: props.user.payment,
+    transaction: props.user.transaction,
   });
+
   const dispatch = useDispatch();
 
   const handleChange = (e) => {
     e.preventDefault();
-    setState({ ...state, [e.target.name]: e.target.value });
+    setTransactions({ ...transactions, [e.target.name]: e.target.value });
+  };
+  const handleEdit = (e) => {
+    e.preventDefault();
+    let newTransaction = {
+      name: transactions.name,
+      date: transactions.date,
+      category: transactions.category,
+      price: transactions.price,
+      payment: transactions.payment,
+      transaction: transactions.transaction,
+      id: props.user.id,
+    };
+    dispatch(editTransaction({ id: props.user.id, newTransaction }));
+    handleEditClose();
   };
 
-  const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-
-      const newTransaction = {
-        date: state.date,
-        name: state.name,
-        category: state.category,
-        price: state.price,
-        payment: state.payment,
-        transactionType: state.transactionType,
-      };
-      const response = await axios.post(
-        'http://localhost/transactions',
-        newTransaction
-      );
-      dispatch(addTransaction(newTransaction));
-      setState({
-        date: '',
-        name: '',
-        category: '',
-        price: '',
-        payment: '',
-        transactionType: '',
-      });
-      // console.log(state.price);
-      // console.log(typeof state.price);
-      handleClose();
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+  const [show, setShow] = useState(false);
+  const handleEditClose = () => setShow(false);
+  const handleEditShow = () => setShow(true);
 
   return (
-    <Row>
-      <Button
-        variant="primary"
-        onClick={handleShow}
-        className="addButton"
+    <>
+      <button
         style={{
-          position: 'fixed',
-          right: '10px',
-          top: '70%',
-          margin: '15px',
-          marginRight: '8px',
-          width: '50px',
-          height: '50px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: 'rgb(32, 76, 117)',
+          width: '60px',
+          backgroundColor: 'grey',
+          color: 'white',
+          borderRadius: '5px',
+          margin: '2px',
           border: 'none',
-          borderRadius: '50%',
-          zIndex: 5,
         }}
+        onClick={handleEditShow}
       >
-        <span
-          className="material-symbols-outlined"
-          style={{
-            fontSize: '45px',
-            zIndex: 1,
-          }}
-        >
-          +
-        </span>
-      </Button>
-
+        Edit
+      </button>
       <Modal
         show={show}
-        onHide={handleClose}
+        onHide={handleEditClose}
         backdrop="static"
         keyboard={false}
       >
@@ -108,27 +67,27 @@ const AddTransaction = () => {
             margin: '5px',
             padding: '10px',
           }}
-          onSubmit={handleSubmit}
+          onSubmit={handleEdit}
         >
           <Form.Group>
             <Form.Check
               inline
               label="Expense"
-              name="transactionType"
+              name="transaction"
               type="radio"
               id="Expense"
               value="Expense"
-              checked={state.transactionType === 'Expense'}
+              checked={transactions.transaction === 'Expense'}
               onChange={handleChange}
             />
             <Form.Check
               inline
               label="Income"
-              name="transactionType"
+              name="transaction"
               type="radio"
               id="Income"
               value="Income"
-              checked={state.transactionType === 'Income'}
+              checked={transactions.transaction === 'Income'}
               onChange={handleChange}
             />
           </Form.Group>
@@ -152,7 +111,7 @@ const AddTransaction = () => {
             <Form.Control
               type="date"
               name="date"
-              value={state.date}
+              value={transactions.date}
               onChange={handleChange}
             ></Form.Control>
           </Form.Group>
@@ -178,7 +137,7 @@ const AddTransaction = () => {
               placeholder="Enter Description"
               maxLength={20}
               name="name"
-              value={state.name}
+              value={transactions.name}
               onChange={handleChange}
               required
             />
@@ -206,12 +165,12 @@ const AddTransaction = () => {
               type="text"
               onChange={handleChange}
               name="category"
-              value={state.category}
+              value={transactions.category}
             >
               <option> Choose Category</option>
               <option></option>
               <option>EXPENSE</option>
-              <option value="Food">Food and Drink</option>
+              <option value="Food">Food</option>
               <option value="Transport">Transport</option>
               <option value="Groceries">Groceries</option>
               <option value="Utilities">Utilities</option>
@@ -252,7 +211,7 @@ const AddTransaction = () => {
               placeholder="Enter Amount"
               onChange={handleChange}
               name="price"
-              value={state.price}
+              value={transactions.price}
               required
             />
           </Form.Group>
@@ -280,8 +239,8 @@ const AddTransaction = () => {
                 name="payment"
                 type="radio"
                 id="cash"
-                value="Cash"
-                checked={state.payment === 'Cash'}
+                value={transactions.payment}
+                checked={transactions.payment === 'Cash'}
                 onChange={handleChange}
               />
               <Form.Check
@@ -290,18 +249,18 @@ const AddTransaction = () => {
                 name="payment"
                 type="radio"
                 id="card"
-                value="Card"
-                checked={state.payment === 'Card'}
+                value={'Card'}
+                checked={transactions.payment === 'Card'}
                 onChange={handleChange}
               />
               <Form.Check
                 inline
                 label="Mobile Money"
                 name="payment"
-                value="Mobile Money"
+                value={transactions.payment}
                 type="radio"
                 id="mobileMoney"
-                checked={state.payment === 'Mobile Money'}
+                checked={transactions.payment === 'Mobile Money'}
                 onChange={handleChange}
               />
             </div>
@@ -315,55 +274,23 @@ const AddTransaction = () => {
               alignItems: 'center',
               border: 'none',
             }}
-          ></Form.Group>
-          <Form.Group
-            style={{
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'space-between',
-            }}
           >
             <Button
               type="submit"
-              style={{
-                width: '150px',
-                backgroundColor: 'transparent',
-                color: 'grey',
-                padding: '0',
-                border: 'none',
-              }}
+              onClick={handleEditClose}
+              style={{ width: '150px' }}
             >
-              <span
-                className="material-symbols-outlined returnArrow"
-                onClick={handleClose}
-              >
-                arrow_back
-              </span>
+              <span>Cancel</span>
             </Button>
-            <Button
-              type="submit"
-              style={{
-                width: '150px',
-                backgroundColor: 'transparent',
-                color: 'grey',
-                padding: '0',
-                border: 'none',
-              }}
-            >
-              <span
-                type="submit"
-                // style={{
-                //   fontSize: '40px',
-                // }}
-                className="material-symbols-outlined returnArrow"
-              >
-                done
-              </span>
+
+            <Button type="submit" style={{ width: '150px' }}>
+              <span>Edit</span>
             </Button>
           </Form.Group>
         </Form>
       </Modal>
-    </Row>
+    </>
   );
 };
-export default AddTransaction;
+
+export default EditTransaction;

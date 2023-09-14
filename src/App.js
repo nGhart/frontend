@@ -6,12 +6,12 @@ import Navigation from './components/navigation/Navigation';
 import Footer from './components/footer/Footer';
 import Login from './pages/login/Login';
 import './styles/global.scss';
+import axios from 'axios';
 import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
   RouterProvider,
-  Routes,
   Outlet,
 } from 'react-router-dom';
 import Home from './pages/home/Home';
@@ -27,6 +27,12 @@ import TransactionPage from './pages/TransactionPage/TransactionPage';
 import DoePage from './pages/doePage/DoePage';
 import BuckPage from './pages/buckPage/BuckPage';
 import MatingPage from './pages/matingPage/MatingPage';
+import InvoicePage from './pages/invoicepage/InvoicePage';
+import AddEmployee from './contents/employees/AddEmployee';
+import EmployeeList from './contents/employees/EmployeeList';
+import EditEmployee from './contents/employees/EditEmployee';
+import HealthPage from './pages/health/HealthPage';
+import DiseaseList from './contents/health/DiseaseList';
 
 //check styles here, theres a position relative
 const Layout = () => {
@@ -46,6 +52,16 @@ const Layout = () => {
   );
 };
 
+export const makeApiRequest = async (url, method, data = null) => {
+  try {
+    const response = await axios[method](url, data);
+    return response.data;
+  } catch (error) {
+    console.error('API Error:', error);
+    throw error;
+  }
+};
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -61,12 +77,11 @@ const router = createBrowserRouter(
         <Route path="animals" element={<AnimalTable />}>
           <Route path="animals/:id" element={<AnimalTable />} />
         </Route>
-        <Route path="employee" element={<EmployeePage />} />
-        {/* <Route path="breeding" element={<BreedingPage />}>
-          <Route path="doe" element={<DoePage />} />
-          <Route path="buck" element={<BuckPage />} />
-          <Route path="mating" element={<MatingPage />} />
-        </Route> */}
+        <Route path="employee" element={<EmployeePage />}>
+          <Route index element={<EmployeeList />} />
+          {/* <Route path="create-employee" element={<AddEmployee />} /> */}
+          {/* <Route path="employee/:id" element={<EditEmployee />} /> */}
+        </Route>
 
         <Route path="breeding" element={<BreedingPage />}>
           {/* Render a different component based on the route */}
@@ -75,11 +90,19 @@ const router = createBrowserRouter(
           <Route path="buck" element={<BuckPage />} />
           <Route path="mating" element={<MatingPage />} />
         </Route>
+        <Route path="health" element={<HealthPage />}>
+          {/* Render a different component based on the route */}
+          <Route index element={<DiseaseList />} />
+          {/* <Route path="doe" element={<DoePage />} />
+          <Route path="buck" element={<BuckPage />} />
+          <Route path="mating" element={<MatingPage />} /> */}
+        </Route>
 
         <Route path="feed" element={<FeedPage />} />
         <Route path="inventory" element={<InventoryPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="transaction" element={<TransactionPage />} />
+        <Route path="invoice" element={<InvoicePage />} />
         {/*<Route path="" element={<Home />} /> */}
       </Route>
       <Route path="/login" element={<Login />} />
