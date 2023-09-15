@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const AddDisease = () => {
   const [disease, setDisease] = useState({
-    diseaseId: '',
+    diseaseAnimal: '',
     diseaseCondition: '',
     diseaseManagement: '',
     diseaseDuration: '',
@@ -28,7 +28,11 @@ const AddDisease = () => {
   };
   const handleClick = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:1994/diseases');
+    axios
+      .post('http://localhost:1994/diseases', disease)
+      .then((res) => console.log(res))
+      .catch((error) => console.error());
+    setShow(false);
   };
 
   useEffect(() => {
@@ -45,6 +49,8 @@ const AddDisease = () => {
           onHide={handleClose}
           backdrop="static"
           keyboard={false}
+          aria-labelledby="contained-modal-title-vcenter"
+          centered
         >
           <Modal.Header closeButton>
             <Modal.Title>Modal title</Modal.Title>
@@ -53,11 +59,11 @@ const AddDisease = () => {
             <Form>
               <Form.Group className="mb-3" controlId="">
                 <Form.Control
-                  value={disease.diseaseId}
+                  value={disease.diseaseAnimal}
                   type="text"
                   placeholder="Animal ID"
                   onChange={handleChange}
-                  name="diseaseId"
+                  name="diseaseAnimal"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="">
@@ -83,7 +89,7 @@ const AddDisease = () => {
               <Form.Group className="mb-3" controlId="">
                 <Form.Control
                   value={disease.diseaseDuration}
-                  type="text"
+                  type="Number"
                   placeholder="Duration of Treatment"
                   onChange={handleChange}
                   name="diseaseDuration"

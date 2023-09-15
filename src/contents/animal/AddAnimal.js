@@ -46,17 +46,26 @@ const AddAnimal = () => {
       >
         Add Animal
       </button>
-      <Modal fullscreen show={show} onHide={modalClose}>
+      <Modal
+        show={show}
+        onHide={modalClose}
+        backdrop="static"
+        keyboard={false}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
         <Modal.Header closeButton>
-          <h1>Add Animal</h1>
+          <h1>Add Animal</h1>{' '}
+        </Modal.Header>
+        <Modal.Body>
           <Form onSubmit={store.handleAddAnimal}>
             <div
-              style={{
-                display: 'grid',
-                gap: '20px',
-                gridTemplateColumns: 'repeat(5, 1fr)',
-                gridAutoRows: 'minmax(20px, auto)',
-              }}
+            // style={{
+            //   display: 'grid',
+            //   gap: '20px',
+            //   gridTemplateColumns: 'repeat(5, 1fr)',
+            //   gridAutoRows: 'minmax(20px, auto)',
+            // }}
             >
               <fieldset>
                 <Form.Group>
@@ -304,9 +313,6 @@ const AddAnimal = () => {
               </fieldset>
             </div>
             <div>
-              <button variant="secondary" onClick={modalClose}>
-                Cancel
-              </button>
               <button
                 style={{
                   border: 'none',
@@ -319,17 +325,13 @@ const AddAnimal = () => {
               >
                 Add
               </button>
-
-              {/* <button variant="primary">Save changes</button> */}
             </div>
           </Form>
-        </Modal.Header>
-
+        </Modal.Body>
         <Modal.Footer>
           <button variant="secondary" onClick={modalClose}>
-            Close Modal
+            footerCancel
           </button>
-          <button variant="primary">Save changes</button>
         </Modal.Footer>
       </Modal>
     </div>

@@ -49,3 +49,58 @@ const EmployeePage = () => {
 };
 
 export default EmployeePage;
+
+// import React, { useEffect, useState } from 'react';
+// import employeeStore from '../stores/store';
+// import Employees from '../contents/employee/Employees';
+// import EditEmployee from '../contents/employee/EditEmployee';
+// import AddEmployee from '../contents/employee/AddEmployee';
+// import '../contents/employee/employee.css';
+
+// const EmployeeTable = () => {
+//   const store = employeeStore();
+
+//   useEffect(() => {
+//     store.getEmployees();
+//   }, []);
+
+//   const [show, setShow] = useState(false);
+
+//   const handleClose = () => setShow(false);
+//   const handleShow = () => setShow(true);
+
+//   const [selectedEmployee, setSelectedEmployee] = useState(null);
+
+//   const showEmployeeDetails = (employee) => {
+//     setSelectedEmployee(employee);
+//   };
+//   return (
+//     <>
+//       <h1 className="font6" style={{ margin: 0, padding: 0 }}>
+//         Employee Records
+//       </h1>
+//       <AddEmployee />
+//       <Employees />
+//       <EditEmployee />
+
+//       <div
+//         style={{
+//           width: '100%',
+//           height: '100%',
+//         }}
+//       >
+//         {selectedEmployee && (
+//           <div className="employee-details">
+//             <h2>Employee Details</h2>
+
+//             <p>Name: {selectedEmployee.name}</p>
+//             <p>Breed: {selectedEmployee.breed}</p>
+//             <button onClick={() => setSelectedEmployee(null)}>Close</button>
+//           </div>
+//         )}
+//       </div>
+//     </>
+//   );
+// };
+
+// export default EmployeeTable;

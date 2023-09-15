@@ -9,6 +9,7 @@ const EditAnimal = () => {
       {store.updateForm._id && (
         <section className="updateForm">
           <h1>Update</h1>
+
           <Form
             style={{ display: 'flex', flexWrap: 'wrap' }}
             onSubmit={store.updateAnimal}
