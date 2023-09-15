@@ -2,23 +2,11 @@ import React, { useState } from 'react';
 import animalStore from '../../stores/store';
 import './animal.css';
 
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-
 const SingleAnimal = ({ item, props }) => {
   const store = animalStore((store) => {
     return { editAnimal: store.editAnimal, deleteAnimal: store.deleteAnimal };
   });
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
 
-  const showAnimalDetails = (animal) => {
-    setSelectedAnimal(animal);
-  };
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
   return (
     <>
       <tr key={item._id}>
@@ -32,10 +20,7 @@ const SingleAnimal = ({ item, props }) => {
         <td>{item.weightCurrent}</td>
         <td>
           <div className="around actionIcons">
-            <button
-              className="actionIcons"
-              onClick={() => showAnimalDetails(item)}
-            >
+            <button className="actionIcons">
               <i className="fas fa-eye"></i>
             </button>
 

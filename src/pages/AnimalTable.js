@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import animalStore from '../stores/store';
 import Animals from '../contents/animal/Animals';
 import AddAnimal from '../contents/animal/AddAnimal';

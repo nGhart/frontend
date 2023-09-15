@@ -5,18 +5,8 @@ import SingleAnimal from './SingleAnimal';
 
 const Animals = (props) => {
   const store = animalStore();
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
   return (
     <div>
-      {selectedAnimal && (
-        <div className="animal-details">
-          <h2>Animal Details</h2>
-          <p>Name: {selectedAnimal.name}</p>
-          <p>Breed: {selectedAnimal.breed}</p>
-          {/* Include other properties here */}
-          <button onClick={() => setSelectedAnimal(null)}>Close</button>
-        </div>
-      )}
       <Table bordered hover>
         <thead>
           <tr>
