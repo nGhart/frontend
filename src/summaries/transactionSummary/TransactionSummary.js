@@ -9,7 +9,7 @@ const TransactionSummary = () => {
 
   useEffect(() => {
     store.getTransactions();
-  }, []);
+  }, [store]);
 
   useEffect(() => {
     if (store.transactions) {

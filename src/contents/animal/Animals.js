@@ -49,11 +49,6 @@ const Animals = () => {
           </tr>
         </thead>
         <tbody>
-          {/* {store.animals &&
-            store.animals.map((item, index) => {
-              return <SingleAnimal item={item} index={index} key={item._id} />;
-            })} */}
-
           {itemsShown.map((item, index) => {
             const newIndex = firstIndex + index;
             return <SingleAnimal item={item} index={newIndex} key={item._id} />;

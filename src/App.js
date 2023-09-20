@@ -66,11 +66,12 @@ const router = createBrowserRouter(
     <>
       <Route
         path="/"
-        element={
-          <RequireAuth>
-            <Layout />
-          </RequireAuth>
-        }
+        // element={
+        //   <RequireAuth>
+        //     <Layout />
+        //   </RequireAuth>
+        // }
+        element={<Layout />}
       >
         <Route path="/" element={<Home />} />
         <Route path="animals" element={<AnimalTable />}></Route>

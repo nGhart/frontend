@@ -94,7 +94,7 @@ const EditProfile = ({
         </Form.Group>
       </Col>
       <Form.Group className="mb-1 box1" controlId="formBasicEmail">
-        <Form.Label>Logo</Form.Label>
+        <Form.Label>Logo Url</Form.Label>
         <Form.Control
           onChange={handleUpdateProfile}
           type="text"
@@ -102,18 +102,7 @@ const EditProfile = ({
           value={updateFormProfile.logo}
         />
       </Form.Group>
-      {/* <Form.Group className="position-relative mb-1 ">
-          <Form.Label>Logo</Form.Label>
-          <Form.Control
-            type="file"
-                        name="file"
-            onChange={handleUpdateProfile}
-            // isInvalid={!!errors.file}
-          />
-          <Form.Control.Feedback type="invalid" tooltip>
-            {/* {errors.file}
-          </Form.Control.Feedback>
-        </Form.Group> */}
+
       <div className="formButtonsContainer">
         <button className="formButtons" type="submit">
           Save

@@ -11,53 +11,6 @@ const AddProfile = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [imageLoading, setImageLoading] = useState(false);
-  const [logo, setLogo] = useState(
-    'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg'
-  );
-  const [logoMessage, setLogoMessage] = useState('');
-  const postDetails = async (e) => {
-    const file = e.target.files[0];
-    if (!file) {
-      return setLogoMessage('Upload image');
-    }
-    setLogoMessage(null);
-
-    if (file.type === 'image/jpeg' || file.type === 'image/png') {
-      try {
-        setImageLoading(true);
-
-        const data = new FormData();
-        data.append('file', file);
-        data.append('upload_preset', 'rabbitRecords');
-        data.append('cloud_name', 'dquz47ysg');
-
-        const response = await fetch(
-          'https://api.cloudinary.com/v1_1/dquz47ysg/image/upload',
-          {
-            method: 'POST',
-            body: data,
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error('Failed to upload image to Cloudinary');
-        }
-
-        const imageData = await response.json();
-        console.log(imageData);
-
-        setLogo(imageData.secure_url);
-      } catch (error) {
-        console.error('Image Upload Error:', error);
-        setLogoMessage('Image upload failed');
-      } finally {
-        setImageLoading(false);
-      }
-    } else {
-      setLogoMessage('Upload a .png or .jpeg file');
-    }
-  };
   return (
     <>
       <button className="addButtons" onClick={handleShow}>
@@ -163,8 +116,8 @@ const AddProfile = () => {
                 />
               </Form.Group>
             </Col>
-            {/* <Form.Group className="mb-1 box1" controlId="formBasicEmail">
-              <Form.Label>Logo *</Form.Label>
+            <Form.Group className="mb-1 box1" controlId="formBasicEmail">
+              <Form.Label>Logo Url *</Form.Label>
               <Form.Control
                 required
                 onChange={store.updateCreateProfiles}
@@ -172,26 +125,7 @@ const AddProfile = () => {
                 name="logo"
                 value={store.createProfile.logo}
               />
-            </Form.Group> */}
-            {/* <Form.Group className="position-relative mb-3" controlId="logo">
-              <Form.Label>Upload logo</Form.Label>
-              <Form.Control
-                type="file"
-                name="logo"
-                onChange={postDetails}
-                // isInvalid={!!errors.file}
-                value={logo}
-              />
-
-              {logoMessage}
-            </Form.Group> */}
-
-            <Form.Group className="position-relative mb-3" controlId="logo">
-              <Form.Label>Upload logo</Form.Label>
-              <Form.Control type="file" name="logo" onChange={postDetails} />
-              {logoMessage}
             </Form.Group>
-
             <div className="formButtonsContainer">
               <button className="formButtons" type="submit">
                 Add Profile
