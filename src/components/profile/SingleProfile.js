@@ -4,7 +4,8 @@ import EditProfile from './EditProfile';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import Container from 'react-bootstrap/Container';
+import './profile.scss';
 const SingleProfile = ({ item, index }) => {
   const store = profileStore((store) => {
     return {
@@ -23,34 +24,34 @@ const SingleProfile = ({ item, index }) => {
   const handleCloseModal = () => setShowModal(false);
 
   return (
-    <>
-      <Row key={item._id}>
-        <Col>
+    <Container className="flex">
+      <Row key={item._id} className="profileContainer">
+        <Col className="imageContainer">
           <img src={item.logo} alt="Logo" />
         </Col>
-        <Col>
-          <h3>{item.name}</h3>
-          <h3>{item.email}</h3>
-          <h3>{item.number1}</h3>
-          <h3>{item.number2}</h3>
-          <h3>{item.building}</h3>
-          <h3>{item.street}</h3>
-          <h3>{item.city}</h3>
-          <h3>{item.country}</h3>
-        </Col>
-        <Row>
+        <Col className="detailsContainer font1">
+          <h3>Business Name: {item.name}</h3>
+          <h3>Email: {item.email}</h3>
+          <h3>Number: {item.number1}</h3>
+          <h3>Number 2: {item.number2}</h3>
+          <Row>
+            <Col>
+              <h3>Address: </h3>
+            </Col>
+            <Col>
+              <h4>{item.building}</h4>
+              <h4>{item.street}</h4>
+              <h4>{item.city}</h4>
+              <h4>{item.country}</h4>
+            </Col>
+          </Row>
+
           <div className="formButtonsContainer">
             <button className="formButtons" onClick={handleOpenModal}>
               Update Profile
             </button>
-            {/* <button
-              className="actionIcons"
-              onClick={() => store.deleteProfile(item._id)}
-            >
-              <i className="fas fa-trash-alt"></i>
-            </button> */}
           </div>
-        </Row>
+        </Col>
       </Row>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
@@ -65,7 +66,7 @@ const SingleProfile = ({ item, index }) => {
           />
         </Modal.Body>
       </Modal>
-    </>
+    </Container>
   );
 };
 

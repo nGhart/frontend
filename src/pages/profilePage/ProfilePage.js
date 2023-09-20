@@ -19,7 +19,7 @@ const ProfilePage = () => {
         <Navbar style={{ backgroundColor: 'rgb(14, 73, 60)' }}>
           <Container>
             <Navbar.Brand href="#home">
-              <h1 className="title">Profiles</h1>
+              <h1 className="title">Profile</h1>
             </Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
