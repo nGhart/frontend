@@ -19,11 +19,11 @@ const Todo = ({ todos, completeTodo, removeTodo, updatedTodos }) => {
 
   return (
     <div
-    // className={
-    //   (todos.length !== null && todos.length) > 9
-    //     ? 'todoContainer'
-    //     : 'nothing'
-    // }
+      className={
+        (todos.length !== null && todos.length) > 9
+          ? 'todoContainer'
+          : 'nothing'
+      }
     >
       {todos.map((todo, index) => (
         <div
@@ -31,7 +31,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updatedTodos }) => {
           key={index}
         >
           <div key={todo.id} onClick={() => completeTodo(todo.id)}>
-            <span className="checkparent" style={{ width: '10px' }}>
+            <span className="checkparent" style={{ width: '8px' }}>
               <span className={todo.isComplete ? 'checkComplete' : 'check'}>
                 ✔
               </span>
@@ -40,7 +40,7 @@ const Todo = ({ todos, completeTodo, removeTodo, updatedTodos }) => {
           </div>
           <div className="icons">
             <span onClick={() => removeTodo(todo.id)} className="deleteIcon">
-              ✖
+              X
             </span>
             <span
               onClick={() => editTodo({ id: todo.id, value: todo.text })}
@@ -56,4 +56,3 @@ const Todo = ({ todos, completeTodo, removeTodo, updatedTodos }) => {
 };
 
 export default Todo;
-//<span className='checkbox'>✖</span>

@@ -1,132 +1,117 @@
-// import React, { Component } from 'react';
-// import Form from 'react-bootstrap/Form';
-// import Button from 'react-bootstrap/Button';
-// //import Modal from 'react-bootstrap/Modal';
-// import axios from 'axios';
+import React, { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import employeeStore from '../../stores/employeeStore';
 
-// class AddEmployee extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.onChangeEmployeeName = this.onChangeEmployeeName.bind(this);
-//     this.onChangeEmployeeRole = this.onChangeEmployeeRole.bind(this);
-//     this.onChangeEmployeeNumber = this.onChangeEmployeeNumber.bind(this);
-//     this.onChangeEmployeeDepartment =
-//       this.onChangeEmployeeDepartment.bind(this);
-//     this.onChangeEmployeeSalary = this.onChangeEmployeeSalary.bind(this);
-//     this.onChangeEmployeeStartDate = this.onChangeEmployeeStartDate.bind(this);
-//     this.onEmployeeEndDate = this.onEmployeeEndDate.bind(this);
+const AddEmployee = () => {
+  const store = employeeStore();
+  const [show, setShow] = useState(false);
 
-//     this.onSubmit = this.onSubmit.bind(this);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  return (
+    <>
+      <button className="addButtons" onClick={handleShow}>
+        Add New Entry
+      </button>
 
-//     this.state = {
-//       employeeName: '',
-//       employeeRole: '',
-//       employeeNumber: '',
-//       employeeDepartment: '',
-//       employeeSalary: '',
-//       employeeStartDate: '',
-//       employeeEndDate: '',
-//     };
-//   }
+      <Modal
+        show={show}
+        onHide={handleClose}
+        animation={false}
+        backdrop="static"
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add New Employee</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form onSubmit={store.handleAddEmployee}>
+            <Form.Group controlId="employeeName">
+              <Form.Label>Name *</Form.Label>
+              <Form.Control
+                required
+                onChange={store.updateCreateEmployees}
+                value={store.createEmployee.employeeName}
+                type="text"
+                name="employeeName"
+              />
+            </Form.Group>
+            <Form.Group controlId="employeeRole">
+              <Form.Label>Role *</Form.Label>
+              <Form.Control
+                required
+                onChange={store.updateCreateEmployees}
+                value={store.createEmployee.employeeRole}
+                type="text"
+                name="employeeRole"
+              />
+            </Form.Group>
+            <Form.Group controlId="employeeDepartment">
+              <Form.Label>Department *</Form.Label>
+              <Form.Control
+                required
+                onChange={store.updateCreateEmployees}
+                value={store.createEmployee.employeeDepartment}
+                type="text"
+                name="employeeDepartment"
+              />
+            </Form.Group>
+            <Form.Group controlId="employeeNumber">
+              <Form.Label>Number *</Form.Label>
+              <Form.Control
+                required
+                onChange={store.updateCreateEmployees}
+                value={store.createEmployee.employeeNumber}
+                type="text"
+                name="employeeNumber"
+              />
+            </Form.Group>
+            <Form.Group controlId="employeeSalary">
+              <Form.Label>Salary *</Form.Label>
+              <Form.Control
+                required
+                onChange={store.updateCreateEmployees}
+                value={store.createEmployee.employeeSalary}
+                type="number"
+                name="employeeSalary"
+              />
+            </Form.Group>
+            <Form.Group controlId="employeeStartDate">
+              <Form.Label>Start Date</Form.Label>
+              <Form.Control
+                onChange={store.updateCreateEmployees}
+                value={store.createEmployee.employeeStartDate}
+                type="date"
+                name="employeeStartDate"
+              />
+            </Form.Group>
+            <Form.Group controlId="employeeEndDate">
+              <Form.Label>End Date</Form.Label>
+              <Form.Control
+                onChange={store.updateCreateEmployees}
+                value={store.createEmployee.employeeEndDate}
+                type="date"
+                name="employeeEndDate"
+              />
+            </Form.Group>
+            <div className="formButtonsContainer">
+              <button className="formButtons" type="submit">
+                Submit
+              </button>
+              <button className="formButtons" onClick={handleClose}>
+                Close
+              </button>
+            </div>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
+    </>
+  );
+};
 
-//   onChangeEmployeeName(e) {
-//     this.setState({ employeeName: e.target.value });
-//   }
-//   onChangeEmployeeRole(e) {
-//     this.setState({ employeeRole: e.target.value });
-//   }
-//   onChangeEmployeeNumber(e) {
-//     this.setState({ employeeNumber: e.target.value });
-//   }
-//   onChangeEmployeeDepartment(e) {
-//     this.setState({ employeeDepartment: e.target.value });
-//   }
-//   onChangeEmployeeSalary(e) {
-//     this.setState({ employeeSalary: e.target.value });
-//   }
-//   onChangeEmployeeStartDate(e) {
-//     this.setState({ employeeStartDate: e.target.value });
-//   }
-//   onChangeEmployeeEndDate(e) {
-//     this.setState({ employeeEndDate: e.target.value });
-//   }
-
-//   onSubmit(e) {
-//     e.preventDefault();
-//     const employeeObject = {
-//       employeeName: this.state.employeeName,
-//       employeeRole: this.state.employeeRole,
-//       employeeNumber: this.state.employeeNumber,
-//       employeeDepartment: this.state.employeeDepartment,
-//       employeeSalary: this.state.employeeSalary,
-//       employeeStartDate: this.state.employeeStartDate,
-//       employeeEndDate: this.state.employeeEndDate,
-//     };
-//     axios
-//       .post('http://localhost:1994/employees/create-employee', employeeObject)
-//       .then((res) => console.log(res.data));
-//     this.setState({
-//       employeeName: '',
-//       employeeRole: '',
-//       employeeNumber: '',
-//       employeeDepartment: '',
-//       employeeSalary: '',
-//       employeeStartDate: '',
-//       employeeEndDate: '',
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>AddEmployee</h1>
-
-//       </div>
-//     );
-//   }
-// }
-
-// export default AddEmployee;
-
-// // const [show, setShow] = useState(false);
-
-// // const handleClose = () => setShow(false);
-// // const handleShow = () => setShow(true);
-// {
-//   /* <Button
-//           variant="primary"
-//           //onClick={handleShow}
-//         >
-//           Launch static backdrop modal
-//         </Button>
-// }
-// {
-//    <Modal
-//           show={show}
-//           onHide={handleClose}
-//           backdrop="static"
-//           keyboard={false}
-//         >
-//           <Modal.Header closeButton>
-//             <Modal.Title>Modal title</Modal.Title>
-//           </Modal.Header>
-//           <Modal.Body></Modal.Body>
-//           <Modal.Footer>
-//             <Button
-//               variant="secondary"
-//               //onClick={handleClose}
-//             >
-//               Close
-//             </Button>
-//             <Button variant="primary">Understood</Button>
-//           </Modal.Footer>
-//         </Modal>
-// }
-
-// // import React from 'react';
-
-// // const AddEmployee = () => {
-// //   return <div>AddEmployee</div>;
-// // };
-
-// // export default AddEmployee;
+export default AddEmployee;

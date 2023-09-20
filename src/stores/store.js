@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import axios from 'axios';
-import ErrorPage from '../components/ErrorPage';
 
 const animalStore = create((set) => ({
   //states
@@ -56,7 +55,7 @@ const animalStore = create((set) => ({
     butcheredKits: '',
     _id: null,
   },
-
+  animalSex: [],
   //functions
   getAnimals: async () => {
     try {
@@ -64,9 +63,9 @@ const animalStore = create((set) => ({
       set({ animals: response.data.animals });
     } catch (error) {
       console.log(error);
-      return <ErrorPage />;
     }
   },
+
   updateCreateAnimals: (e) => {
     try {
       const { name, value } = e.target;
@@ -82,7 +81,6 @@ const animalStore = create((set) => ({
       console.log(error);
     }
   },
-
   handleAddAnimal: async (e) => {
     try {
       e.preventDefault();
@@ -188,7 +186,6 @@ const animalStore = create((set) => ({
       console.log(error);
     }
   },
-
   updateAnimal: async (e) => {
     try {
       e.preventDefault();

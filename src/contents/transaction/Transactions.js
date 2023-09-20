@@ -1,86 +1,110 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Row from 'react-bootstrap/Row';
-import { useEffect } from 'react';
 import SingleTransaction from './SingleTransaction';
-import { useDispatch, useSelector } from 'react-redux';
-import { getBalance, getEachTotal } from '../../appSlice/transactionSlice';
+import transactionStore from '../../stores/transactionStore';
+import Stack from 'react-bootstrap/Stack';
 
 const Transactions = () => {
-  const state = useSelector((state) => {
-    return state.userReducer;
-  });
-
-  const dispatch = useDispatch();
+  const store = transactionStore();
 
   useEffect(() => {
-    dispatch(getEachTotal());
-  }, [state]);
+    store.getTransactions();
+  }, []);
+
   useEffect(() => {
-    dispatch(getBalance());
-  }, [state]);
+    if (store.transactions) {
+      const totalIncome = store.transactions.reduce((total, transaction) => {
+        return transaction.transactionType === 'Income'
+          ? total + parseFloat(transaction.price)
+          : total;
+      }, 0);
+
+      const totalExpenses = store.transactions.reduce((total, transaction) => {
+        return transaction.transactionType === 'Expense'
+          ? total + parseFloat(transaction.price)
+          : total;
+      }, 0);
+
+      const balance = totalIncome - totalExpenses;
+
+      store.set((state) => ({
+        totalIncomeAndExpenses: {
+          ...state.totalIncomeAndExpenses,
+          totalIncome: totalIncome.toFixed(2),
+          totalExpenses: totalExpenses.toFixed(2),
+          balance: balance.toFixed(2),
+        },
+      }));
+    }
+  }, [store.transactions]);
   return (
     <>
-      <section
-        style={{
-          textAlign: 'center',
-          display: 'flex',
-          width: '100%',
-          height: '50px',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          position: 'fixed',
-          left: 0,
-          marginBottom: '2000px',
-          padding: '5px',
-        }}
-        className="transactionHeader"
-      >
-        <h6>
-          Balance{' '}
-          <span
-            style={{
-              color: `${state.balance < 0 ? 'red' : 'black'}`,
-              fontFamily: 'Carter One',
-            }}
-          >
-            {state.balance}
-          </span>
-        </h6>
-        <h6>
-          Income GHC
-          <span
-            style={{
-              color: 'green',
-              fontWeight: '700',
-              fontFamily: 'Carter One',
-            }}
-          >
-            {state.totalIncome}
-          </span>
-        </h6>
-        <h6>
-          Expense GHC
-          <span
-            style={{
-              color: 'red',
-              // fontWeight: '700',
-              fontFamily: 'Carter One',
-            }}
-          >
-            {state.totalExpense}
-          </span>
-        </h6>
-      </section>
+      <Stack gap={3}>
+        <div
+          className="p-2 font4"
+          style={{
+            textAlign: 'center',
+            display: 'flex',
+            width: '100%',
+            height: '50px',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            padding: '5px',
+            backgroundColor: 'rgb(47, 137, 118)',
+          }}
+        >
+          <h4>
+            Balance GHC{' '}
+            <span
+              style={{
+                color: `${
+                  store.totalIncomeAndExpenses.balance < 0 ? 'red' : 'black'
+                }`,
+                fontFamily: 'Carter One',
+              }}
+            >
+              {store.totalIncomeAndExpenses.balance}
+            </span>
+          </h4>
+          <h5>
+            Income GHC{' '}
+            <span
+              style={{
+                color: 'green',
+                fontWeight: '700',
+                fontFamily: 'Carter One',
+              }}
+            >
+              {store.totalIncomeAndExpenses.totalIncome}
+            </span>
+          </h5>
+          <h5>
+            Expense GHC{' '}
+            <span
+              style={{
+                color: 'red',
+                // fontWeight: '700',
+                fontFamily: 'Carter One',
+              }}
+            >
+              {store.totalIncomeAndExpenses.totalExpenses}
+            </span>
+          </h5>
+        </div>
+      </Stack>
+
       <Row
         style={{
+          width: '100%',
           marginTop: '55px',
           display: 'flex',
           justifyContent: 'center',
         }}
       >
-        {state.transactions.map((item) => {
-          return <SingleTransaction key={item.id} user={item} />;
-        })}
+        {store.transactions &&
+          store.transactions.map((item) => {
+            return <SingleTransaction key={item._id} item={item} />;
+          })}
       </Row>
     </>
   );

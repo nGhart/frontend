@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-//import { v1 as uuid } from 'uuid';
 
 function Todoform(props) {
   const [input, setInput] = useState(props.edit ? props.edit.value : '');

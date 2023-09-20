@@ -1,38 +1,38 @@
 import React, { useState } from 'react';
 import contactStore from '../../stores/contactStore';
 import EditContact from './EditContact';
-
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-const SingleContact = ({ item }) => {
+
+const SingleContact = ({ item, index }) => {
   const store = contactStore((store) => {
     return {
       editContact: store.editContact,
       deleteContact: store.deleteContact,
+      handleUpdateContact: store.handleUpdateContact,
+      updateContact: store.updateContact,
+      updateFormContact: store.updateFormContact,
     };
   });
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [showModal, setShowModal] = useState(false);
+  const handleOpenModal = () => {
+    store.editContact(item);
+    setShowModal(true);
+  };
+  const handleCloseModal = () => setShowModal(false);
+
   return (
     <>
       <tr key={item._id}>
-        <td></td>
+        <td>{index + 1}</td>
         <td>{item.contactName}</td>
         <td>{item.contactNumber}</td>
         <td>{item.contactEmail}</td>
         <td>{item.contactGroup}</td>
-
         <td>
           <div className="around actionIcons">
-            <button
-              className="actionIcons"
-              onClick={handleShow}
-              //onClick={() => store.editContact(item)}
-            >
+            <button className="actionIcons" onClick={handleOpenModal}>
               <i className="fas fa-edit"></i>
             </button>
-
             <button
               className="actionIcons"
               onClick={() => store.deleteContact(item._id)}
@@ -42,31 +42,19 @@ const SingleContact = ({ item }) => {
           </div>
         </td>
       </tr>
-      {/* <Modal
-        show={show}
-        onHide={handleClose}
-        backdrop="static"
-        keyboard={false}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
-        <EditContact item={item} handleClose={handleClose} />
-      </Modal> */}
-
-      {/* <Modal
-        show={true} // Show the modal directly within this component
-        backdrop="static"
-        keyboard={false}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-      >
+      <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
-          <Modal.Title>Update Contact</Modal.Title>
+          <Modal.Title>Edit Entry</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-         
+          <EditContact
+            updateContact={store.updateContact}
+            handleUpdateContact={store.handleUpdateContact}
+            updateFormContact={store.updateFormContact}
+            handleCloseModal={handleCloseModal}
+          />
         </Modal.Body>
-      </Modal> */}
+      </Modal>
     </>
   );
 };

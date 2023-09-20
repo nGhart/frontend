@@ -1,5 +1,5 @@
 import './chartbox.scss';
-import React, { PureComponent } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   PieChart,
   Pie,
@@ -8,61 +8,71 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import animalStore from '../../stores/store';
+import Container from 'react-bootstrap/Container';
 
 import { Link } from 'react-router-dom';
-const data01 = [
-  { name: 'Group A', value: 400 },
-  { name: 'Group B', value: 300 },
-  { name: 'Group C', value: 300 },
-  { name: 'Group D', value: 200 },
-];
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
-class ChartBox extends PureComponent {
-  render() {
-    return (
-      <div className="chartBox">
-        <div className="boxInfo">
-          <div className="title">Total Animals</div>
-          <h1 className="number">62</h1>
-          <Link to="/">View</Link>
-        </div>
-        <div className="chartInfo">
-          <div className="chart">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart
-              //width={200} height={200}
-              >
-                <Pie
-                  data={data01}
-                  //   cx={75}
-                  //   cy={50}
-                  innerRadius={30}
-                  outerRadius={50}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {data01.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                    />
-                  ))}
-                </Pie>
 
-                <Tooltip
-                  contentStyle={{ background: 'transparent', border: 'none' }}
-                  labelStyle={{ display: 'none' }}
-                  position={{ x: 30, y: 110 }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          {/* <div className="text">
-            <h6>45%</h6>
-          </div> */}
+const ChartBox = () => {
+  const store = animalStore();
+
+  const [males, setMales] = useState([]);
+  const [females, setFemales] = useState([]);
+  useEffect(() => {
+    store.getAnimals();
+  }, [store]);
+  const animals = store.animals || [];
+  useEffect(() => {
+    const maleAnimals = animals.filter((item) => item.sex === 'Male');
+    setMales(maleAnimals);
+  }, [store.animals]);
+  useEffect(() => {
+    const femaleAnimals = animals.filter((item) => item.sex === 'Female');
+    setFemales(femaleAnimals);
+  }, [store.animals]);
+
+  const data01 = [
+    { name: 'Males', value: males.length },
+    { name: 'Females', value: females.length },
+  ];
+  const COLORS = ['rgb(20, 66, 56)', '#00C49F'];
+
+  return (
+    <Container className="chartBox" style={{ textAlign: 'center' }}>
+      <div className="boxInfo">
+        <h3 className="font2">Total Animals</h3>
+        <h1 className="number">{animals.length}</h1>
+      </div>
+      <div className="chartInfo">
+        <div className="chart">
+          <ResponsiveContainer width="100%" height="100%">
+            <PieChart>
+              <Pie
+                data={data01}
+                innerRadius={30}
+                outerRadius={50}
+                paddingAngle={5}
+                dataKey="value"
+              >
+                {data01.map((entry, index) => (
+                  <Cell
+                    key={`cell-${index}`}
+                    fill={COLORS[index % COLORS.length]}
+                  />
+                ))}
+              </Pie>
+
+              <Tooltip
+                contentStyle={{ background: 'transparent', border: 'none' }}
+                labelStyle={{ display: 'none' }}
+                position={{ x: 30, y: 125 }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
         </div>
       </div>
-    );
-  }
-}
+    </Container>
+  );
+};
+
 export default ChartBox;

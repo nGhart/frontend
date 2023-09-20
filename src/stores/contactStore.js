@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import axios from 'axios';
-import ErrorPage from '../components/ErrorPage';
 
 const contactStore = create((set) => ({
   contacts: null,
@@ -24,7 +23,6 @@ const contactStore = create((set) => ({
       set({ contacts: response.data.contacts });
     } catch (error) {
       console.log(error);
-      return <ErrorPage />;
     }
   },
   updateCreateContacts: (e) => {
@@ -42,7 +40,6 @@ const contactStore = create((set) => ({
       console.log(error);
     }
   },
-
   handleAddContact: async (e) => {
     try {
       e.preventDefault();
@@ -61,7 +58,7 @@ const contactStore = create((set) => ({
         },
       });
     } catch (error) {
-      console.log(error.messsage);
+      console.log(error.message);
     }
   },
   deleteContact: async (_id) => {
@@ -79,7 +76,6 @@ const contactStore = create((set) => ({
       console.log(error);
     }
   },
-
   handleUpdateContact: (e) => {
     try {
       const { value, name } = e.target;
@@ -111,7 +107,6 @@ const contactStore = create((set) => ({
       console.log(error);
     }
   },
-
   updateContact: async (e) => {
     try {
       e.preventDefault();

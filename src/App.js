@@ -18,23 +18,24 @@ import Home from './pages/home/Home';
 import RequireAuth from './components/RequireAuth';
 import SignupPage from './components/signup/SignupPage';
 import LogoutPage from './pages/logout/LogoutPage';
-import BreedingPage from './pages/breedingPage/BreedingPage';
 import EmployeePage from './pages/employeePage/EmployeePage';
 import FeedPage from './pages/feedPage/FeedPage';
 import InventoryPage from './pages/inventoryPage/InventoryPage';
 import ContactPage from './pages/contactPage/ContactPage';
 import TransactionPage from './pages/TransactionPage/TransactionPage';
-import DoePage from './pages/doePage/DoePage';
-import BuckPage from './pages/buckPage/BuckPage';
 import MatingPage from './pages/matingPage/MatingPage';
 import InvoicePage from './pages/invoicepage/InvoicePage';
-import AddEmployee from './contents/employees/AddEmployee';
-import EmployeeList from './contents/employees/EmployeeList';
-import EditEmployee from './contents/employees/EditEmployee';
 import HealthPage from './pages/health/HealthPage';
-import DiseaseList from './contents/health/DiseaseList';
+//import DisplayAnimal from './contents/animal/ViewAnimal';
+import ViewAnimal from './contents/animal/ViewAnimal';
+import QuarantinePage from './pages/quarantinePage/QuarantinePage';
+import VaccinationPage from './pages/vaccinationPage/VaccinationPage';
+import DiseasePage from './pages/disease/DiseasePage';
+import MedicationPage from './pages/medicationPage/MedicationPage';
+import TransactionCategory from './contents/transaction/TransactionCategory';
+import Print from './contents/invoice/Print';
+import ProfilePage from './pages/profilePage/ProfilePage';
 
-//check styles here, theres a position relative
 const Layout = () => {
   return (
     <div className="mainSection">
@@ -65,49 +66,39 @@ export const makeApiRequest = async (url, method, data = null) => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route
+      {/* <Route
         path="/"
         element={
           <RequireAuth>
             <Layout />
           </RequireAuth>
         }
-      >
+      > */}
+      <Route path="/" element={<Layout />}>
         <Route path="/" element={<Home />} />
-        <Route path="animals" element={<AnimalTable />}>
-          <Route path="animals/:id" element={<AnimalTable />} />
-        </Route>
-        <Route path="employee" element={<EmployeePage />}>
-          <Route index element={<EmployeeList />} />
-          {/* <Route path="create-employee" element={<AddEmployee />} /> */}
-          {/* <Route path="employee/:id" element={<EditEmployee />} /> */}
-        </Route>
-
-        <Route path="breeding" element={<BreedingPage />}>
-          {/* Render a different component based on the route */}
-          <Route index element={<DoePage />} />
-          <Route path="doe" element={<DoePage />} />
-          <Route path="buck" element={<BuckPage />} />
-          <Route path="mating" element={<MatingPage />} />
-        </Route>
+        <Route path="animals" element={<AnimalTable />}></Route>
+        <Route path="/animals/:id" element={<ViewAnimal />} />
+        <Route path="employee" element={<EmployeePage />} />
+        <Route path="mating" element={<MatingPage />} />
         <Route path="health" element={<HealthPage />}>
-          {/* Render a different component based on the route */}
-          <Route index element={<DiseaseList />} />
-          {/* <Route path="doe" element={<DoePage />} />
-          <Route path="buck" element={<BuckPage />} />
-          <Route path="mating" element={<MatingPage />} /> */}
+          <Route index element={<DiseasePage />} />
+          <Route path="disease" element={<DiseasePage />} />
+          <Route path="quarantine" element={<QuarantinePage />} />
+          <Route path="vaccination" element={<VaccinationPage />} />
         </Route>
-
         <Route path="feed" element={<FeedPage />} />
         <Route path="inventory" element={<InventoryPage />} />
         <Route path="contact" element={<ContactPage />} />
         <Route path="transaction" element={<TransactionPage />} />
+        <Route path="category" element={<TransactionCategory />} />
+        <Route path="profile" element={<ProfilePage />} />
         <Route path="invoice" element={<InvoicePage />} />
-        {/*<Route path="" element={<Home />} /> */}
+        <Route path="meds" element={<MedicationPage />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignupPage />} />
       <Route path="/logout" element={<LogoutPage />} />
+      <Route path="/print" element={<Print />} />
     </>
   )
 );
@@ -121,3 +112,10 @@ function App() {
 }
 
 export default App;
+
+{
+  /* <Route path="/animals/:id" element={<DisplayAnimal />} /> */
+}
+{
+  /* <Route path="/animals/:id" component={<ViewAnimal />} /> */
+}

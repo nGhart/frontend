@@ -21,8 +21,8 @@ const Contacts = () => {
         </thead>
         <tbody>
           {store.contacts &&
-            store.contacts.map((item) => {
-              return <SingleContact item={item} key={item._id} />;
+            store.contacts.map((item, index) => {
+              return <SingleContact index={index} item={item} key={item._id} />;
             })}
         </tbody>
       </Table>

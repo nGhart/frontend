@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import authStore from '../../stores/authStore';
 import { Link, useNavigate } from 'react-router-dom';
+import './loginForm.scss';
 
 const LoginForm = () => {
   const store = authStore();
@@ -14,25 +15,24 @@ const LoginForm = () => {
     navigate('/');
   };
   return (
-    <div>
+    <div className="formContainer">
       <Form onSubmit={handleLogin}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
           <Form.Control
+            required
             onChange={store.updateLoginForm}
             type="email"
             name="email"
             value={store.loginForm.email}
             placeholder="Enter email"
           />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            required
             onChange={store.updateLoginForm}
             type="password"
             name="password"
@@ -41,13 +41,15 @@ const LoginForm = () => {
           />
         </Form.Group>
 
-        <Button type="submit">Log in</Button>
+        <button className="formButtons" type="submit">
+          Log in
+        </button>
       </Form>
-      <div>
+      <div className="signupOption">
         <h6>Don't have an account</h6>
-        <span>
+        <button className="formButtons">
           <Link to="/signup">Sign Up</Link>
-        </span>
+        </button>
       </div>
     </div>
   );

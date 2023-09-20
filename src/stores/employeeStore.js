@@ -1,59 +1,25 @@
 import { create } from 'zustand';
 import axios from 'axios';
-import ErrorPage from '../components/ErrorPage';
 
 const employeeStore = create((set) => ({
-  //states
   employees: null,
   createEmployee: {
-    name: '',
-    sex: '',
-    dob: '',
-    bred: '',
-    breed: '',
-    dame: '',
-    sire: '',
-    grandDame: '',
-    grandSire: '',
-    weaning: '',
-    weightBirth: '',
-    weightWean: '',
-    weight8: '',
-    weightCurrent: '',
-    weightSale: '',
-    firstService: '',
-    totalService: '',
-    totalLitters: '',
-    totalKits: '',
-    aliveKits: '',
-    deadKits: '',
-    soldKits: '',
-    butcheredKits: '',
+    employeeName: '',
+    employeeRole: '',
+    employeeNumber: '',
+    employeeDepartment: '',
+    employeeSalary: '',
+    employeeStartDate: '',
+    employeeEndDate: '',
   },
   updateForm: {
-    name: '',
-    sex: '',
-    dob: '',
-    bred: '',
-    breed: '',
-    dame: '',
-    sire: '',
-    grandDame: '',
-    grandSire: '',
-    weaning: '',
-    weightBirth: '',
-    weightWean: '',
-    weight8: '',
-    weightCurrent: '',
-    weightSale: '',
-    firstService: '',
-    totalService: '',
-    totalLitters: '',
-    totalKits: '',
-    aliveKits: '',
-    deadKits: '',
-    soldKits: '',
-    butcheredKits: '',
+    employeeName: '',
+    employeeRole: '',
+    employeeNumber: '',
+    employeeDepartment: '',
+    employeeSalary: '',
+    employeeStartDate: '',
+    employeeEndDate: '',
     _id: null,
   },
 
@@ -64,7 +30,6 @@ const employeeStore = create((set) => ({
       set({ employees: response.data.employees });
     } catch (error) {
       console.log(error);
-      return <ErrorPage />;
     }
   },
   updateCreateEmployees: (e) => {
@@ -82,7 +47,6 @@ const employeeStore = create((set) => ({
       console.log(error);
     }
   },
-
   handleAddEmployee: async (e) => {
     try {
       e.preventDefault();
@@ -94,29 +58,13 @@ const employeeStore = create((set) => ({
       set({
         employees: [...employees, response.data.employee],
         createEmployee: {
-          name: '',
-          sex: '',
-          dob: '',
-          bred: '',
-          breed: '',
-          dame: '',
-          sire: '',
-          grandDame: '',
-          grandSire: '',
-          weaning: '',
-          weightBirth: '',
-          weightWean: '',
-          weight8: '',
-          weightCurrent: '',
-          weightSale: '',
-          firstService: '',
-          totalService: '',
-          totalLitters: '',
-          totalKits: '',
-          aliveKits: '',
-          deadKits: '',
-          soldKits: '',
-          butcheredKits: '',
+          employeeName: '',
+          employeeRole: '',
+          employeeNumber: '',
+          employeeDepartment: '',
+          employeeSalary: '',
+          employeeStartDate: '',
+          employeeEndDate: '',
         },
       });
     } catch (error) {
@@ -159,29 +107,67 @@ const employeeStore = create((set) => ({
       set({
         updateForm: {
           name: item.name,
-          sex: item.sex,
-          dob: item.dob,
-          bred: item.bred,
-          breed: item.breed,
-          dame: item.dame,
-          sire: item.sire,
-          grandDame: item.grandDame,
-          grandSire: item.grandSire,
-          weaning: item.weaning,
-          weightBirth: item.weightBirth,
-          weightWean: item.weightWean,
-          weight8: item.weight8,
-          weightCurrent: item.weightCurrent,
-          weightSale: item.weightSale,
-          firstService: item.firstService,
-          totalService: item.totalService,
-          totalLitters: item.totalLitters,
-          totalKits: item.totalKits,
-          aliveKits: item.aliveKits,
-          deadKits: item.deadKits,
-          soldKits: item.soldKits,
-          butcheredKits: item.butcheredKits,
+          employeeName: item.employeeName,
+          employeeRole: item.employeeRole,
+          employeeNumber: item.employeeNumber,
+          employeeDepartment: item.employeeDepartment,
+          employeeSalary: item.employeeSalary,
+          employeeStartDate: item.employeeStartDate,
+          employeeEndDate: item.employeeEndDate,
           _id: item._id,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  updateEmployee: async (e) => {
+    try {
+      e.preventDefault();
+      const {
+        updateForm: {
+          employeeName,
+          employeeRole,
+          employeeNumber,
+          employeeDepartment,
+          employeeSalary,
+          employeeStartDate,
+          employeeEndDate,
+          _id,
+        },
+        employees,
+      } = employeeStore.getState();
+
+      const response = await axios.put(
+        `http://localhost:1994/employees/${_id}`,
+        {
+          employeeName,
+          employeeRole,
+          employeeNumber,
+          employeeDepartment,
+          employeeSalary,
+          employeeStartDate,
+          employeeEndDate,
+        }
+      );
+
+      const newEmployees = [...employees];
+      const employeeIndex = employees.findIndex((item) => {
+        return item._id === _id;
+      });
+      newEmployees[employeeIndex] = response.data.employee;
+
+      set({
+        employees: newEmployees,
+        updateForm: {
+          employeeName: '',
+          employeeRole: '',
+          employeeNumber: '',
+          employeeDepartment: '',
+          employeeSalary: '',
+          employeeStartDate: '',
+          employeeEndDate: '',
+          _id: null,
         },
       });
     } catch (error) {

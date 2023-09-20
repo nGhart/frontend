@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const authStore = create((set) => ({
-  //states
   loggedIn: null,
   loginForm: {
     email: '',
@@ -19,10 +19,12 @@ const authStore = create((set) => ({
     city: '',
     counting: '',
     pobox: '',
-    letterhead: '',
+    letterhead:
+      'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg',
   },
+  token: null,
+  user: null,
 
-  //functions
   updateLoginForm: (e) => {
     const { name, value } = e.target;
     set((state) => {
@@ -45,22 +47,54 @@ const authStore = create((set) => ({
       };
     });
   },
+  // login: async (e) => {
+  //   try {
+  //     const { loginForm } = authStore.getState();
+  //     const response = await axios.post('/login', loginForm);
+  //     const token = response.data.token;
+  //     set({ token });
+  //     Cookies.set('token', token, { expires: 20 });
+
+  //     set({
+  //       loggedIn: true,
+  //       loginForm: {
+  //         email: '',
+  //         password: '',
+  //       },
+  //     });
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // },
+
   login: async (e) => {
     try {
       const { loginForm } = authStore.getState();
       const response = await axios.post('/login', loginForm);
+      const token = response.data.token;
+      //console.log('Response:', response);
+
+      console.log('Received token:', token);
+
+      set({ token });
+      Cookies.set('token', token, { expires: 20 });
+
       set({
         loggedIn: true,
         loginForm: {
           email: '',
           password: '',
         },
+        user: 'userInfo',
       });
+
       console.log(response);
     } catch (error) {
       console.log(error.message);
     }
   },
+
   checkAuth: async () => {
     try {
       await axios.get('/check-auth');
@@ -91,7 +125,9 @@ const authStore = create((set) => ({
   },
   logout: async () => {
     await axios.get('/logout');
+    Cookies.remove('token');
     set({ loggedIn: false });
+    localStorage.removeItem('userInfo');
   },
 }));
 export default authStore;

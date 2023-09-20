@@ -1,124 +1,151 @@
-import React from 'react';
-import { useDispatch } from 'react-redux';
-import { deleteTransaction } from '../../appSlice/transactionSlice';
+import React, { useState } from 'react';
 import EditTransaction from './EditTransaction';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import Modal from 'react-bootstrap/Modal';
+import transactionStore from '../../stores/transactionStore';
+import Stack from 'react-bootstrap/Stack';
+import './transaction.css';
 
-const SingleTransaction = (props) => {
-  const dispatch = useDispatch();
+const SingleTransaction = ({ item }) => {
+  const store = transactionStore((store) => {
+    return {
+      editTransaction: store.editTransaction,
+      deleteTransaction: store.deleteTransaction,
+      handleUpdateTransaction: store.handleUpdateTransaction,
+      updateTransaction: store.updateTransaction,
+      updateFormTransaction: store.updateFormTransaction,
+    };
+  });
+
+  const [showModal, setShowModal] = useState(false);
+  const handleOpenModal = () => {
+    store.editTransaction(item);
+    setShowModal(true);
+  };
+  const handleCloseModal = () => setShowModal(false);
+
   let colourTransaction;
   colourTransaction =
-    props.user.transaction === 'Income'
+    item.transactionType === 'Income'
       ? (colourTransaction = 'green')
       : (colourTransaction = 'red');
 
   return (
-    <Col
-      xs={11}
-      lg={{ span: 6, offset: 3 }}
-      key={props.user.id}
-      style={{
-        margin: '5px',
-        borderRadius: '5px',
-        boxShadow: '2px 2px 2px 2px grey',
-      }}
-    >
-      <Row>
+    <>
+      <Stack gap={3}>
         <div
+          className="p-2"
           style={{
-            textAlign: 'center',
-            width: '100%',
+            margin: '2px',
+            borderRadius: '5px',
+            backgroundColor: 'white',
+            color: 'black',
+            boxShadow: '2px 2px 2px 2px grey',
             display: 'flex',
             justifyContent: 'space-between',
-            fontStyle: 'italic',
-            paddingTop: '2px',
           }}
         >
-          <p style={{ padding: '5px' }}>{props.user.date}</p>
-          <p
+          <div className="transactionDetails" style={{ width: '88%' }}>
+            <div key={item.id}>
+              <div>
+                <div
+                  style={{
+                    textAlign: 'center',
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                    fontStyle: 'italic',
+                  }}
+                >
+                  <p style={{ padding: '5px' }}>{item.date}</p>
+                  <p style={{ fontStyle: 'italic' }}>
+                    Category:{item.category}
+                  </p>
+                  <p
+                    style={{
+                      backgroundColor: `${colourTransaction}`,
+                      padding: '5px',
+                      color: 'white',
+                      fontWeight: 700,
+                      borderRadius: '5px',
+                    }}
+                  >
+                    {item.transactionType}
+                  </p>
+                </div>
+              </div>
+              <div
+                style={{
+                  margin: 'auto',
+                  //width: '100%',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'space-around',
+                }}
+              >
+                {/* <div
+                  // xs={8}
+                  style={{
+                    display: 'flex',
+                    //height: '100%',
+                    alignItems: 'center',
+                  }}
+                > */}
+                <section>
+                  <h6 style={{ fontWeight: 700, textTransform: 'capitalize' }}>
+                    {item.name}
+                  </h6>
+                </section>
+
+                <h6>
+                  GHC{' '}
+                  <span
+                    style={{
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {item.price}
+                  </span>
+                </h6>
+                <p>{item.payment}</p>
+              </div>
+            </div>
+          </div>
+          <div
+            className="actions"
             style={{
-              backgroundColor: `${colourTransaction}`,
-              padding: '5px',
-              color: 'white',
-              fontWeight: 700,
-              borderRadius: '5px',
+              width: '10%',
+              margin: 'auto',
             }}
           >
-            {props.user.transaction}
-          </p>
-        </div>
-      </Row>
-      <Row
-        style={{
-          margin: 'auto',
-          width: '100%',
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Col
-          xs={8}
-          style={{
-            display: 'flex',
-            height: '100%',
-            alignItems: 'center',
-          }}
-        >
-          <section>
-            <h6 style={{ fontWeight: 700, textTransform: 'capitalize' }}>
-              {props.user.name}
-            </h6>
-            <p style={{ fontStyle: 'italic' }}>
-              Category:{props.user.category}
-            </p>
-          </section>
-        </Col>
-        <Col>
-          <h6>
-            GHC{' '}
-            <span
-              style={{
-                fontWeight: 'bold',
+            <button className="transactionAction" onClick={handleOpenModal}>
+              Edit
+            </button>
+            <button
+              className="transactionAction"
+              onClick={() => {
+                store.deleteTransaction(item._id);
               }}
             >
-              {props.user.price}
-            </span>
-          </h6>
-          <p>{props.user.payment}</p>
-        </Col>
-      </Row>
-      <div
-        style={{
-          display: 'flex',
-          width: '100%',
-          justifyContent: 'center',
-        }}
-      >
-        <EditTransaction
-          user={props.user}
-          editTransaction={props.editTransaction}
-        />
+              Delete
+            </button>
+          </div>
+        </div>
+      </Stack>
 
-        <button
-          style={{
-            width: '60px',
-            backgroundColor: 'grey',
-            color: 'white',
-            borderRadius: '5px',
-            margin: '2px',
-            border: 'none',
-          }}
-          onClick={() => {
-            dispatch(deleteTransaction(props.user.id));
-          }}
-        >
-          Delete
-        </button>
-      </div>
-    </Col>
+      <Modal show={showModal} onHide={handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Entry</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <EditTransaction
+            updateTransaction={store.updateTransaction}
+            handleUpdateTransaction={store.handleUpdateTransaction}
+            updateFormTransaction={store.updateFormTransaction}
+            handleCloseModal={handleCloseModal}
+          />
+        </Modal.Body>
+      </Modal>
+    </>
   );
 };
 export default SingleTransaction;

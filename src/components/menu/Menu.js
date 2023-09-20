@@ -1,5 +1,7 @@
 import './menu.scss';
 import { Link } from 'react-router-dom';
+import feed from '../../assets/feed.png';
+import bunny from '../../assets/rabbit.png';
 
 const Menu = () => {
   return (
@@ -7,7 +9,12 @@ const Menu = () => {
       <div className="item">
         <span className="title">General</span>
         <Link to="/animals" className="listItem">
-          <i className="fas fa-home"></i>
+          <img
+            src={bunny}
+            alt='<a href="https://www.flaticon.com/free-icons/rabbit" title="rabbit icons">Rabbit icons created by Freepik - Flaticon</a>'
+            width={20}
+          />
+
           <span className="listItemTitle">Animal Records</span>
         </Link>
         <Link to="/employee" className="listItem">
@@ -15,57 +22,48 @@ const Menu = () => {
           <span className="listItemTitle">Employee Records</span>
         </Link>
         <Link to="/feed" className="listItem">
-          <i className="fas fa-user-alt"></i>
+          <img src={feed} alt="Grain sack" width={20} />
           <span className="listItemTitle">Feed Records</span>
         </Link>
         <Link to="/inventory" className="listItem">
-          <i className="fas fa-user-alt"></i>
+          <i className="fas fa-list-ol"></i>
           <span className="listItemTitle">Inventory</span>
         </Link>
       </div>
       <div className="item">
         <span className="title">Breeding</span>
-        <Link to="/breeding" className="listItem">
-          <i className="fas fa-user-alt"></i>
-
-          <span className="listItemTitle">Breeding Records</span>
+        <Link to="/mating" className="listItem">
+          <i className="fas fa-venus-mars"></i>
+          {/* <img src={mating} alt="" /> */}
+          <span className="listItemTitle">Mating Records</span>
         </Link>
-        {/* <Link to="/" className="listItem">
-          <i className="fas fa-user-alt"></i>
-
-          <span className="listItemTitle">Individual Records</span>
-        </Link> */}
       </div>
       <div className="item">
         <span className="title">Health</span>
         <Link to="health" className="listItem">
-          <i className="fas fa-user-alt"></i>
+          <i className="fas fa-plus-square"></i>
           <span className="listItemTitle">Health Records</span>
         </Link>
-        <Link to="/" className="listItem">
-          <i className="fas fa-home"></i>
+        <Link to="meds" className="listItem">
+          <i className="fas fa-prescription"></i>
           <span className="listItemTitle">Medication Stock</span>
         </Link>
-        {/* <Link to="/" className="listItem">
-          <i className="fas fa-user-alt"></i>
-          <span className="listItemTitle">Vaccination Records</span>
-        </Link> */}
       </div>
       <div className="item">
         <span className="title">Finance</span>
         <Link to="transaction" className="listItem">
-          <i className="fas fa-home"></i>
+          <i className="fas fa-dollar-sign"></i>
           <span className="listItemTitle">Expense Manager</span>
         </Link>
         <Link to="invoice" className="listItem">
-          <i className="fas fa-user-alt"></i>
+          <i className="fas fa-file-invoice"></i>
           <span className="listItemTitle">Invoice</span>
         </Link>
       </div>
       <div className="item">
         <span className="title">Others</span>
         <Link to="/contact" className="listItem">
-          <i className="fas fa-home"></i>
+          <i className="fas fa-address-book"></i>
           <span className="listItemTitle">Contacts</span>
         </Link>
       </div>

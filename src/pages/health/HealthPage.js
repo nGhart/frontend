@@ -6,21 +6,26 @@ const HealthPage = () => {
   return (
     <>
       <div style={{}}>
-        <h1>Breeding Records</h1>
+        <h1
+          className="title"
+          style={{ backgroundColor: 'rgb(14, 73, 60)', padding: '10px' }}
+        >
+          Health Records
+        </h1>
         <Nav
           justify
           variant="tabs"
-          defaultActiveKey="doe"
+          defaultActiveKey="disease"
           className="justify-content"
         >
           <Nav.Item>
             <Link to="disease">Disease</Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="buck">Quarantine</Link>
+            <Link to="quarantine">Quarantine</Link>
           </Nav.Item>
           <Nav.Item>
-            <Link to="mating">Vaccination</Link>
+            <Link to="vaccination">Vaccination</Link>
           </Nav.Item>
         </Nav>
         <div>
