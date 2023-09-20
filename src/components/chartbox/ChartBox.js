@@ -1,17 +1,8 @@
 import './chartbox.scss';
 import React, { useEffect, useState } from 'react';
-import {
-  PieChart,
-  Pie,
-  Legend,
-  Cell,
-  Tooltip,
-  ResponsiveContainer,
-} from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import animalStore from '../../stores/store';
 import Container from 'react-bootstrap/Container';
-
-import { Link } from 'react-router-dom';
 
 const ChartBox = () => {
   const store = animalStore();

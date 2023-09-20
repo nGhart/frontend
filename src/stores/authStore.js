@@ -9,18 +9,8 @@ const authStore = create((set) => ({
     password: '',
   },
   signupForm: {
-    name: '',
     email: '',
     password: '',
-    number1: '',
-    number2: '',
-    building: '',
-    street: '',
-    city: '',
-    counting: '',
-    pobox: '',
-    letterhead:
-      'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg',
   },
   token: null,
   user: null,
@@ -47,33 +37,11 @@ const authStore = create((set) => ({
       };
     });
   },
-  // login: async (e) => {
-  //   try {
-  //     const { loginForm } = authStore.getState();
-  //     const response = await axios.post('/login', loginForm);
-  //     const token = response.data.token;
-  //     set({ token });
-  //     Cookies.set('token', token, { expires: 20 });
-
-  //     set({
-  //       loggedIn: true,
-  //       loginForm: {
-  //         email: '',
-  //         password: '',
-  //       },
-  //     });
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.log(error.message);
-  //   }
-  // },
-
   login: async (e) => {
     try {
       const { loginForm } = authStore.getState();
       const response = await axios.post('/login', loginForm);
       const token = response.data.token;
-      //console.log('Response:', response);
 
       console.log('Received token:', token);
 
@@ -109,17 +77,8 @@ const authStore = create((set) => ({
     const response = await axios.post('/signup', signupForm);
     set({
       signupForm: {
-        name: '',
         email: '',
         password: '',
-        number1: '',
-        number2: '',
-        building: '',
-        street: '',
-        city: '',
-        counting: '',
-        pobox: '',
-        letterhead: '',
       },
     });
   },

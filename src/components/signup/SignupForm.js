@@ -1,5 +1,5 @@
 import './signupForm.scss';
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import authStore from '../../stores/authStore';
 import { Link, useNavigate } from 'react-router-dom';
@@ -16,10 +16,14 @@ const SignupForm = () => {
     await store.signup();
     navigate('/login');
   };
+
+  const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState('');
+  const [image, setImage] = useState('');
+
   return (
     <div>
       <h1 className="font2">Sign up</h1>
-
       <Form onSubmit={handleSignup}>
         <Container>
           <Row>
@@ -136,18 +140,19 @@ const SignupForm = () => {
               />
             </Form.Group>
             {/* <Form.Group className="position-relative mb-1 ">
-          <Form.Label>Logo</Form.Label>
-          <Form.Control
-            type="file"
-            required
-            name="file"
-            onChange={store.updateSignupForm}
-            // isInvalid={!!errors.file}
-          />
-          <Form.Control.Feedback type="invalid" tooltip>
-            {/* {errors.file}
-          </Form.Control.Feedback>
-        </Form.Group> */}
+              <Form.Label>Logo</Form.Label>
+              <Form.Control
+                type="file"
+                name="file"
+                //name="letterhead" value={store.signupForm.letterhead}
+                //onChange={store.updateSignupForm}
+                // isInvalid={!!errors.file}
+                onChange={(e) => setImage(e.target.files[0])}
+              />
+              <Form.Control.Feedback type="invalid" tooltip>
+                //{errors.file}
+              </Form.Control.Feedback>
+            </Form.Group> */}
 
             <button className="formButtons" type="submit">
               Sign Up
@@ -155,6 +160,21 @@ const SignupForm = () => {
           </Row>
         </Container>
       </Form>
+      <div
+        className="formButtonsContainer"
+        style={{
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          width: '100%',
+        }}
+      >
+        <h6>Already have an account</h6>{' '}
+        <Link to="/login">
+          <button className="formButtons" type="button">
+            Login
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
