@@ -32,7 +32,7 @@ const profileStore = create((set) => ({
       const response = await axios.get('/profiles'); // Assuming you have an endpoint for profiles
       set({ profiles: response.data.profiles });
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   },
   updateCreateProfiles: (e) => {

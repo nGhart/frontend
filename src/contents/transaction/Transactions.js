@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Pagination from 'react-bootstrap/Pagination';
 import Row from 'react-bootstrap/Row';
 import SingleTransaction from './SingleTransaction';
 import transactionStore from '../../stores/transactionStore';
@@ -10,7 +11,30 @@ const Transactions = () => {
   useEffect(() => {
     store.getTransactions();
   }, []);
+  const [currentPage, setCurrentPage] = useState(1);
+  const transactions = store.transactions || [];
+  const itemsPerPage = 6;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const itemsShown = transactions.slice(firstIndex, lastIndex);
+  const noPages = Math.ceil(transactions.length / itemsPerPage);
+  const numbers = [...Array(noPages).keys()].map((item) => item + 1);
 
+  function prevPage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function nextPage() {
+    if (currentPage !== noPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  function changePage(id) {
+    setCurrentPage(id);
+  }
   useEffect(() => {
     if (store.transactions) {
       const totalIncome = store.transactions.reduce((total, transaction) => {
@@ -96,16 +120,45 @@ const Transactions = () => {
       <Row
         style={{
           width: '100%',
-          marginTop: '55px',
+          marginTop: '5px',
           display: 'flex',
           justifyContent: 'center',
         }}
       >
-        {store.transactions &&
-          store.transactions.map((item) => {
-            return <SingleTransaction key={item._id} item={item} />;
-          })}
+        {itemsShown.map((item) => {
+          return <SingleTransaction key={item._id} item={item} />;
+        })}
       </Row>
+      <div
+        style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}
+      >
+        <Pagination>
+          <Pagination.Item>
+            <a href="#" onClick={prevPage} style={{ color: 'black' }}>
+              Prev
+            </a>
+          </Pagination.Item>
+          {numbers.map((item) => (
+            <Pagination.Item
+              key={item}
+              className={`${currentPage === item ? 'activePage' : ''}`}
+            >
+              <a
+                href="#"
+                onClick={() => changePage(item)}
+                style={{ color: 'black' }}
+              >
+                {item}
+              </a>
+            </Pagination.Item>
+          ))}
+          <Pagination.Item>
+            <a href="#" onClick={nextPage} style={{ color: 'black' }}>
+              Next
+            </a>
+          </Pagination.Item>
+        </Pagination>
+      </div>
     </>
   );
 };

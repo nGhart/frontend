@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import profileStore from '../../stores/profileStore';
 import Col from 'react-bootstrap/Col';
@@ -11,14 +11,57 @@ const AddProfile = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [loading, setLoading] = useState(false);
-  const [url, setUrl] = useState('');
-  const [image, setImage] = useState('');
+  const [imageLoading, setImageLoading] = useState(false);
+  const [logo, setLogo] = useState(
+    'https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg'
+  );
+  const [logoMessage, setLogoMessage] = useState('');
+  const postDetails = async (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return setLogoMessage('Upload image');
+    }
+    setLogoMessage(null);
 
+    if (file.type === 'image/jpeg' || file.type === 'image/png') {
+      try {
+        setImageLoading(true);
+
+        const data = new FormData();
+        data.append('file', file);
+        data.append('upload_preset', 'rabbitRecords');
+        data.append('cloud_name', 'dquz47ysg');
+
+        const response = await fetch(
+          'https://api.cloudinary.com/v1_1/dquz47ysg/image/upload',
+          {
+            method: 'POST',
+            body: data,
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error('Failed to upload image to Cloudinary');
+        }
+
+        const imageData = await response.json();
+        console.log(imageData);
+
+        setLogo(imageData.secure_url);
+      } catch (error) {
+        console.error('Image Upload Error:', error);
+        setLogoMessage('Image upload failed');
+      } finally {
+        setImageLoading(false);
+      }
+    } else {
+      setLogoMessage('Upload a .png or .jpeg file');
+    }
+  };
   return (
     <>
       <button className="addButtons" onClick={handleShow}>
-        Add New Profile
+        Add Profile
       </button>
 
       <Modal
@@ -77,7 +120,6 @@ const AddProfile = () => {
                 <Form.Text>Optional</Form.Text>
               </Form.Group>
             </Col>
-
             <Form.Group className="mb-1  box1" controlId="formBasicEmail">
               <Form.Label>Building Address</Form.Label>
               <Form.Control
@@ -87,7 +129,6 @@ const AddProfile = () => {
                 value={store.createProfile.building}
               />
             </Form.Group>
-
             <Col xs={12} className="box1">
               <Form.Group className="mb-1 " controlId="formBasicEmail">
                 <Form.Label>Street Name *</Form.Label>
@@ -122,7 +163,7 @@ const AddProfile = () => {
                 />
               </Form.Group>
             </Col>
-            <Form.Group className="mb-1 box1" controlId="formBasicEmail">
+            {/* <Form.Group className="mb-1 box1" controlId="formBasicEmail">
               <Form.Label>Logo *</Form.Label>
               <Form.Control
                 required
@@ -131,20 +172,25 @@ const AddProfile = () => {
                 name="logo"
                 value={store.createProfile.logo}
               />
+            </Form.Group> */}
+            {/* <Form.Group className="position-relative mb-3" controlId="logo">
+              <Form.Label>Upload logo</Form.Label>
+              <Form.Control
+                type="file"
+                name="logo"
+                onChange={postDetails}
+                // isInvalid={!!errors.file}
+                value={logo}
+              />
+
+              {logoMessage}
+            </Form.Group> */}
+
+            <Form.Group className="position-relative mb-3" controlId="logo">
+              <Form.Label>Upload logo</Form.Label>
+              <Form.Control type="file" name="logo" onChange={postDetails} />
+              {logoMessage}
             </Form.Group>
-            {/* <Form.Group className="position-relative mb-1 ">
-          <Form.Label>Logo</Form.Label>
-          <Form.Control
-            type="file"
-            required
-            name="file"
-            onChange={store.updateCreateProfiles}
-            // isInvalid={!!errors.file}
-          />
-          <Form.Control.Feedback type="invalid" tooltip>
-            {/* {errors.file}
-          </Form.Control.Feedback>
-        </Form.Group> */}
 
             <div className="formButtonsContainer">
               <button className="formButtons" type="submit">

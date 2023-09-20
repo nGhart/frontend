@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col';
 const SignupForm = () => {
   const store = authStore();
   const navigate = useNavigate();
+  // const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -43,6 +44,16 @@ const SignupForm = () => {
                   value={store.signupForm.password}
                 />
               </Form.Group>
+              {/* <Form.Group className="mb-1 " controlId="formBasicPassword">
+                <Form.Label>Re-enter Password</Form.Label>
+                <Form.Control
+                  onChange={store.updateSignupForm}
+                  type="password"
+                  name="reenterPassword"
+                  value={reenterPassword}
+                />
+              </Form.Group>
+              <Form.Text>{passwordMessage}</Form.Text>*/}
             </Col>
 
             <button className="formButtons" type="submit">

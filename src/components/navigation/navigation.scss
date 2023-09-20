@@ -33,6 +33,15 @@
         object-fit: cover;
         margin-right: 5px;
       }
+      button {
+        padding: 3px;
+        background-color: transparent;
+        border: 2px outset $dark-bg;
+        &:hover {
+          background-color: $dark-bg;
+          color: white;
+        }
+      }
     }
     .logOutLink {
       .logOut {

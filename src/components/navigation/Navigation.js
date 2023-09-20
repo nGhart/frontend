@@ -29,7 +29,7 @@ const Navigation = () => {
           <div className="user">
             <img src={profilePic} alt="Logo" />
             <Link to="profile">
-              <span>Welcome,{profileName} </span>
+              <button>Welcome {profileName} </button>
             </Link>
           </div>
           <Link className="logOutLink" to="/logout">

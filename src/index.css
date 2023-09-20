@@ -178,3 +178,7 @@ ul {
   color: rgb(26, 44, 40);
   padding: 2px;
 }
+.activePage {
+  background-color: rgb(26, 44, 40);
+  color: white;
+}

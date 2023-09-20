@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Pagination from 'react-bootstrap/Pagination';
 import SingleInvoice from './SingleInvoice';
 import Table from 'react-bootstrap/Table';
 import invoiceStore from '../../stores/invoiceStore';
 
 const Invoices = () => {
   const store = invoiceStore();
+  const [currentPage, setCurrentPage] = useState(1);
+  const invoices = store.invoices || [];
+  const itemsPerPage = 10;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const itemsShown = invoices.slice(firstIndex, lastIndex);
+  const noPages = Math.ceil(invoices.length / itemsPerPage);
+  const numbers = [...Array(noPages).keys()].map((item) => item + 1);
+
+  function prevPage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function nextPage() {
+    if (currentPage !== noPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  function changePage(id) {
+    setCurrentPage(id);
+  }
 
   return (
     <div>
@@ -27,12 +52,42 @@ const Invoices = () => {
           </tr>
         </thead>
         <tbody>
-          {store.invoices &&
-            store.invoices.map((item, index) => {
-              return <SingleInvoice index={index} item={item} key={item._id} />;
-            })}
+          {itemsShown.map((item, index) => {
+            const newIndex = firstIndex + index;
+            return (
+              <SingleInvoice index={newIndex} item={item} key={item._id} />
+            );
+          })}
         </tbody>
       </Table>
+      <div className="flex">
+        <Pagination>
+          <Pagination.Item>
+            <a href="#" onClick={prevPage} style={{ color: 'black' }}>
+              Prev
+            </a>
+          </Pagination.Item>
+          {numbers.map((item) => (
+            <Pagination.Item
+              key={item}
+              className={`${currentPage === item ? 'activePage' : ''}`}
+            >
+              <a
+                href="#"
+                onClick={() => changePage(item)}
+                style={{ color: 'black' }}
+              >
+                {item}
+              </a>
+            </Pagination.Item>
+          ))}
+          <Pagination.Item>
+            <a href="#" onClick={nextPage} style={{ color: 'black' }}>
+              Next
+            </a>
+          </Pagination.Item>
+        </Pagination>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Pagination from 'react-bootstrap/Pagination';
 import SingleDisease from './SingleDisease';
 import Table from 'react-bootstrap/Table';
 import diseaseStore from '../../stores/diseaseStore';
 
 const Diseases = () => {
   const store = diseaseStore();
+  const [currentPage, setCurrentPage] = useState(1);
+  const diseases = store.diseases || [];
+  const itemsPerPage = 7;
+  const lastIndex = currentPage * itemsPerPage;
+  const firstIndex = lastIndex - itemsPerPage;
+  const itemsShown = diseases.slice(firstIndex, lastIndex);
+  const noPages = Math.ceil(diseases.length / itemsPerPage);
+  const numbers = [...Array(noPages).keys()].map((item) => item + 1);
+
+  function prevPage() {
+    if (currentPage !== 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function nextPage() {
+    if (currentPage !== noPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  function changePage(id) {
+    setCurrentPage(id);
+  }
 
   return (
     <div>
@@ -22,12 +47,42 @@ const Diseases = () => {
           </tr>
         </thead>
         <tbody>
-          {store.diseases &&
-            store.diseases.map((item, index) => {
-              return <SingleDisease index={index} item={item} key={item._id} />;
-            })}
+          {itemsShown.map((item, index) => {
+            const newIndex = firstIndex + index;
+            return (
+              <SingleDisease index={newIndex} item={item} key={item._id} />
+            );
+          })}
         </tbody>
       </Table>
+      <div className="flex">
+        <Pagination>
+          <Pagination.Item>
+            <a href="#" onClick={prevPage} style={{ color: 'black' }}>
+              Prev
+            </a>
+          </Pagination.Item>
+          {numbers.map((item) => (
+            <Pagination.Item
+              key={item}
+              className={`${currentPage === item ? 'activePage' : ''}`}
+            >
+              <a
+                href="#"
+                onClick={() => changePage(item)}
+                style={{ color: 'black' }}
+              >
+                {item}
+              </a>
+            </Pagination.Item>
+          ))}
+          <Pagination.Item>
+            <a href="#" onClick={nextPage} style={{ color: 'black' }}>
+              Next
+            </a>
+          </Pagination.Item>
+        </Pagination>
+      </div>
     </div>
   );
 };

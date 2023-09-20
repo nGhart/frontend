@@ -50,6 +50,12 @@ const SingleProfile = ({ item, index }) => {
             <button className="formButtons" onClick={handleOpenModal}>
               Update Profile
             </button>
+            <button
+              className="formButtons"
+              onClick={() => store.deleteProfile(item._id)}
+            >
+              Delete
+            </button>
           </div>
         </Col>
       </Row>
