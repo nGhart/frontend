@@ -2,14 +2,15 @@ import React from 'react';
 import MainScreen from './mainScreen/MainScreen';
 
 import Alert from 'react-bootstrap/Alert';
-const ErrorPage = ({ variant = 'info', children }) => {
+const ErrorPage = ({ message }) => {
   return (
     <>
-      <MainScreen title="Error">
-        <Alert className="errorContainer">
-          <h1>{children}</h1>
-        </Alert>
-      </MainScreen>
+      <Alert
+        // className="errorContainer"
+        variant="danger"
+      >
+        <h4>{message}</h4>
+      </Alert>
     </>
   );
 };

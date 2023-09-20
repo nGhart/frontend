@@ -105,9 +105,10 @@ const Transactions = () => {
           <h5>
             Expense GHC{' '}
             <span
+              className="font3"
               style={{
                 color: 'red',
-                // fontWeight: '700',
+                fontWeight: '700',
                 fontFamily: 'Carter One',
               }}
             >

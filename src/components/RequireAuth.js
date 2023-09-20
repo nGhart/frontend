@@ -1,17 +1,22 @@
 import { Navigate } from 'react-router-dom';
 import authStore from '../stores/authStore';
 import { useEffect } from 'react';
+import Loading from '../components/loading/Loading';
+import ErrorPage from './ErrorPage';
 
 const RequireAuth = (props) => {
   const store = authStore();
+  const [error, setError] = useState(null);
   useEffect(() => {
     if (store.loggedIn === null) {
-      store.checkAuth();
+      store.checkAuth().catch((error) => {
+        setError(error.message);
+      });
     }
   }, []);
-  //whilst waiting for it to check render loading page
   if (store.loggedIn === null) {
-    return <div>Loading</div>;
+    // return <div>Loading</div>;
+    return <Loading />;
   }
   //if not logged in redirect to log in page
   if (store.loggedIn === false) {
@@ -20,6 +25,9 @@ const RequireAuth = (props) => {
         <Navigate to="/login" />
       </div>
     );
+  }
+  if (error) {
+    return <ErrorPage message={error} />;
   }
   return <div>{props.children}</div>;
 };
