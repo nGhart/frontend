@@ -32,6 +32,7 @@ import DiseasePage from './pages/disease/DiseasePage';
 import MedicationPage from './pages/medicationPage/MedicationPage';
 import TransactionCategory from './contents/transaction/TransactionCategory';
 import Print from './contents/invoice/Print';
+import ProfilePage from './pages/profilePage/ProfilePage';
 
 const Layout = () => {
   return (
@@ -88,6 +89,7 @@ const router = createBrowserRouter(
         <Route path="category" element={<TransactionCategory />} />
         <Route path="invoice" element={<InvoicePage />} />
         <Route path="meds" element={<MedicationPage />} />
+        <Route path="profile" element={<ProfilePage />} />
       </Route>
       <Route path="/logout" element={<LogoutPage />} />
       <Route path="/login" element={<Login />} />

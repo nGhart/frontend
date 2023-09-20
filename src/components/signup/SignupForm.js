@@ -17,10 +17,6 @@ const SignupForm = () => {
     navigate('/login');
   };
 
-  const [loading, setLoading] = useState(false);
-  const [url, setUrl] = useState('');
-  const [image, setImage] = useState('');
-
   return (
     <div>
       <h1 className="font2">Sign up</h1>

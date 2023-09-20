@@ -6,10 +6,14 @@ import Col from 'react-bootstrap/Col';
 
 const AddProfile = () => {
   const store = profileStore();
-  const [show, setShow] = useState(false);
 
+  const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const [loading, setLoading] = useState(false);
+  const [url, setUrl] = useState('');
+  const [image, setImage] = useState('');
 
   return (
     <>
