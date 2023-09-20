@@ -22,15 +22,6 @@ const VaccinationSummary = () => {
       </Row>
       <Row>
         <Stack className="font1" gap={2}>
-          {/* {store.vaccinations &&
-            store.vaccinations.map((item) => {
-              return (
-                <div className="p-2 homeBack around" key={item._id}>
-                  <span>{item.medication}</span>{' '}
-                  <span>Due: {item.nextDate.slice(0, 10)}</span>
-                </div>
-              );
-            })} */}
           {recentVaccinations &&
             recentVaccinations.map((item) => {
               return (

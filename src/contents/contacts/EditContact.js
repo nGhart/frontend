@@ -11,7 +11,7 @@ const EditContact = ({
   return (
     <Form onSubmit={updateContact}>
       <Form.Group className="mb-3" controlId="contactName">
-        <Form.Label>Name *</Form.Label>
+        <Form.Label>Name</Form.Label>
         <Form.Control
           type="text"
           name="contactName"

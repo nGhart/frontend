@@ -26,7 +26,6 @@ import TransactionPage from './pages/TransactionPage/TransactionPage';
 import MatingPage from './pages/matingPage/MatingPage';
 import InvoicePage from './pages/invoicepage/InvoicePage';
 import HealthPage from './pages/health/HealthPage';
-import ViewAnimal from './contents/animal/ViewAnimal';
 import QuarantinePage from './pages/quarantinePage/QuarantinePage';
 import VaccinationPage from './pages/vaccinationPage/VaccinationPage';
 import DiseasePage from './pages/disease/DiseasePage';
@@ -74,7 +73,6 @@ const router = createBrowserRouter(
       >
         <Route path="/" element={<Home />} />
         <Route path="animals" element={<AnimalTable />}></Route>
-        <Route path="/animals/:id" element={<ViewAnimal />} />
         <Route path="employee" element={<EmployeePage />} />
         <Route path="mating" element={<MatingPage />} />
         <Route path="health" element={<HealthPage />}>

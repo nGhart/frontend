@@ -1,13 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Stack from 'react-bootstrap/Stack';
 import matingStore from '../stores/matingStore';
 
 const MatingSummary = () => {
   const store = matingStore();
+
+  const [recentMatings, setRecentMatings] = useState([]);
   useEffect(() => {
     store.getMatings();
   }, []);
+  useEffect(() => {
+    const mate = (store.matings || []).slice(-7);
+    setRecentMatings(mate);
+  }, [store.matings]);
+
   function addDaysToDate(originalDate, daysToAdd) {
     const date = new Date(originalDate);
     date.setDate(date.getDate() + daysToAdd);
@@ -24,8 +31,8 @@ const MatingSummary = () => {
       <Container style={{ textAlign: 'center' }}>
         <h3 className="font2">Mating Summary</h3>
         <Stack gap={2} className="font1">
-          {store.matings &&
-            store.matings.map((item, index) => {
+          {recentMatings &&
+            recentMatings.map((item, index) => {
               return (
                 <div className="p-2 homeBack around" key={index}>
                   <span>ID: {item.matingDoe}</span>{' '}
