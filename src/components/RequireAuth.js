@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import authStore from '../stores/authStore';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Loading from '../components/loading/Loading';
 import ErrorPage from './ErrorPage';
 

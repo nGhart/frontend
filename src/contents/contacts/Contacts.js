@@ -6,6 +6,7 @@ import Pagination from 'react-bootstrap/Pagination';
 
 const Contacts = () => {
   const store = contactStore();
+
   const [currentPage, setCurrentPage] = useState(1);
   const contacts = store.contacts || [];
   const itemsPerPage = 10;
