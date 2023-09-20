@@ -20,11 +20,11 @@ const FeedingSummary = () => {
 
   useEffect(() => {
     store.getFeeds();
-  }, [store.feeds]);
+  }, [store]);
 
   useEffect(() => {
     animal.getAnimals();
-  }, []);
+  }, [animal]);
 
   const animals = animal.animals || [];
   let totalAnimals = animals.length;

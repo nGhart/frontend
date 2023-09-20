@@ -8,7 +8,7 @@ const QuarantineSummary = () => {
 
   useEffect(() => {
     store.getQuarantines();
-  }, [store.quarantines]);
+  }, [store]);
 
   useEffect(() => {
     const filteredQuarantines = (store.quarantines || []).filter(

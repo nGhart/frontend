@@ -9,7 +9,7 @@ const MatingSummary = () => {
   const [recentMatings, setRecentMatings] = useState([]);
   useEffect(() => {
     store.getMatings();
-  }, []);
+  }, [store]);
   useEffect(() => {
     const mate = (store.matings || []).slice(-7);
     setRecentMatings(mate);
