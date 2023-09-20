@@ -19,11 +19,8 @@ const TransactionCategory = () => {
       style={{
         height: '100%',
         display: 'flex',
-        //justifyContent: 'space-around',
         justifyContent: 'center',
         alignItems: 'center',
-
-        //width: '600px',
       }}
     >
       <div
