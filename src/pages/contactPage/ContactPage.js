@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import AddContact from '../../contents/contacts/AddContact';
 import Contacts from '../../contents/contacts/Contacts';
 import contactStore from '../../stores/contactStore';

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import authStore from '../../stores/authStore';
 import Table from 'react-bootstrap/Table';
 import './print.scss';
 import profileStore from '../../stores/profileStore';

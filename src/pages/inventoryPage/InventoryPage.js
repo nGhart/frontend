@@ -5,7 +5,6 @@ import inventoryStore from '../../stores/inventoryStore';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
-import { useSelector } from 'react-redux';
 
 const InventoryPage = () => {
   const store = inventoryStore();
@@ -13,15 +12,6 @@ const InventoryPage = () => {
   useEffect(() => {
     store.getInventories();
   }, [store]);
-
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { userInfo } = userLogin;
-  // console.log('userLogin', userLogin);
-  // console.log('userLogin.userinfo', userLogin.userinfo);
-  // console.log('userLogin.userInfo.name', userLogin.userinfo.name);
-  // useEffect(() => {}, [userInfo]);
-
-  //const [user, setUser] = useState(null);
 
   return (
     <div>

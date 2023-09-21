@@ -19,12 +19,10 @@ const SingleFeed = ({ item, index }) => {
 
   useEffect(() => {
     animal.getAnimals();
-  }, []);
+  }, [animal]);
 
   const animals = animal.animals || [];
   let totalAnimals = animals.length;
-  //let startDate = item.feedDatePurchased;
-  //console.log(startDate);
 
   const [showModal, setShowModal] = useState(false);
   const handleOpenModal = () => {

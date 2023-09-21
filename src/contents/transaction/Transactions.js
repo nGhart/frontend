@@ -10,7 +10,7 @@ const Transactions = () => {
 
   useEffect(() => {
     store.getTransactions();
-  }, []);
+  }, [store]);
   const [currentPage, setCurrentPage] = useState(1);
   const transactions = store.transactions || [];
   const itemsPerPage = 6;

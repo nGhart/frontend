@@ -7,7 +7,7 @@ const LogoutPage = () => {
   const store = authStore();
   useEffect(() => {
     store.logout();
-  }, []);
+  }, [store]);
   return (
     <div className="logoutSection">
       <div className="logoutContainer">

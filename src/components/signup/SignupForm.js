@@ -1,5 +1,5 @@
 import './signupForm.scss';
-import React, { useState } from 'react';
+import React from 'react';
 import Form from 'react-bootstrap/Form';
 import authStore from '../../stores/authStore';
 import { Link, useNavigate } from 'react-router-dom';
@@ -10,7 +10,6 @@ import Col from 'react-bootstrap/Col';
 const SignupForm = () => {
   const store = authStore();
   const navigate = useNavigate();
-  // const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSignup = async (e) => {
     e.preventDefault();

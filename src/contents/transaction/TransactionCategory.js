@@ -6,13 +6,13 @@ const TransactionCategory = () => {
 
   useEffect(() => {
     store.getTransactions();
-  }, []);
+  }, [store]);
 
   useEffect(() => {
     if (store.transactions) {
       store.processTransactions();
     }
-  }, [store.transactions]);
+  }, [store]);
 
   return (
     <div

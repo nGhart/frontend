@@ -1,5 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import profileStore from '../../stores/profileStore';
 import Col from 'react-bootstrap/Col';
