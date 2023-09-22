@@ -62,16 +62,16 @@ const authStore = create((set) => ({
       console.log(error.message);
     }
   },
-
-  checkAuth: async () => {
-    try {
-      await axios.get('/check-auth');
-      set({ loggedIn: true });
-    } catch (error) {
-      set({ loggedIn: false });
-      console.log(error.message);
-    }
-  },
+//deploy
+  // checkAuth: async () => {
+  //   try {
+  //     await axios.get('/check-auth');
+  //     set({ loggedIn: true });
+  //   } catch (error) {
+  //     set({ loggedIn: false });
+  //     console.log(error.message);
+  //   }
+  // },
   signup: async () => {
     const { signupForm } = authStore.getState();
     const response = await axios.post('/signup', signupForm);
