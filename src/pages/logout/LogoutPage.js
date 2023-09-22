@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import authStore from '../../stores/authStore';
 import { Link } from 'react-router-dom';
 import './logoutPage.scss';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 
 const LogoutPage = () => {
   const store = authStore();
@@ -9,17 +12,22 @@ const LogoutPage = () => {
     store.logout();
   }, [store]);
   return (
-    <div className="logoutSection">
-      <div className="logoutContainer">
-        <h1 className="font5">Rabbit Records</h1>
+    <Container fluid className="logoutSection">
+      <Row>
+        <Col
+          // xs={{ span: 10, offset: 1 }}
+          className="logoutContainer"
+        >
+          <h1 className="font5">Rabbit Records</h1>
 
-        <h3>You are now logged out</h3>
+          <h3>You are now logged out</h3>
 
-        <Link to="/login">
-          <button className="formButtons">Log in</button>
-        </Link>
-      </div>
-    </div>
+          <Link to="/login">
+            <button className="formButtons">Log in</button>
+          </Link>
+        </Col>
+      </Row>
+    </Container>
   );
 };
 

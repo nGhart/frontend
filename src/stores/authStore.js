@@ -12,7 +12,7 @@ const authStore = create((set) => ({
     email: '',
     password: '',
   },
-  token: null,
+
   user: null,
 
   updateLoginForm: (e) => {
@@ -41,12 +41,6 @@ const authStore = create((set) => ({
     try {
       const { loginForm } = authStore.getState();
       const response = await axios.post('/login', loginForm);
-      const token = response.data.token;
-
-      console.log('Received token:', token);
-
-      set({ token });
-      Cookies.set('token', token, { expires: 20 });
 
       set({
         loggedIn: true,
@@ -84,9 +78,7 @@ const authStore = create((set) => ({
   },
   logout: async () => {
     await axios.get('/logout');
-    Cookies.remove('token');
     set({ loggedIn: false });
-    localStorage.removeItem('userInfo');
   },
 }));
 export default authStore;
