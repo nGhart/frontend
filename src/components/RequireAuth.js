@@ -7,13 +7,14 @@ import ErrorPage from './ErrorPage';
 const RequireAuth = (props) => {
   const store = authStore();
   const [error, setError] = useState(null);
-  useEffect(() => {
-    if (store.loggedIn === null) {
-      store.checkAuth().catch((error) => {
-        setError(error.message);
-      });
-    }
-  }, []);
+  //deploy
+  // useEffect(() => {
+  //   if (store.loggedIn === null) {
+  //     store.checkAuth().catch((error) => {
+  //       setError(error.message);
+  //     });
+  //   }
+  // }, []);
   if (store.loggedIn === null) {
     // return <div>Loading</div>;
     return <Loading />;
