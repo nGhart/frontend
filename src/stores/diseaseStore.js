@@ -71,7 +71,7 @@ const diseaseStore = create((set) => ({
   deleteDisease: async (_id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:1994/diseases/${_id}`
+        `/diseases/${_id}`
       );
       const { diseases } = diseaseStore.getState();
 
@@ -134,7 +134,7 @@ const diseaseStore = create((set) => ({
         diseases,
       } = diseaseStore.getState();
       const response = await axios.put(
-        `http://localhost:1994/diseases/${_id}`,
+        `/diseases/${_id}`,
         {
           diseaseAnimal,
           diseaseCondition,
