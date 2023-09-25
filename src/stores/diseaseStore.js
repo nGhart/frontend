@@ -23,9 +23,7 @@ const diseaseStore = create((set) => ({
 
   getDiseases: async () => {
     try {
-      const response = await axios.get(
-        'https://server2-763m.onrender.com/diseases'
-      );
+      const response = await axios.get('/diseases');
       set({ diseases: response.data.diseases });
     } catch (error) {
       console.log(error);
