@@ -28,4 +28,7 @@ a {
 .contentSection {
   padding: 5px 20px;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  // width: calc(100vw-250px);
 }

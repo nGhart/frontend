@@ -12,8 +12,9 @@ const authStore = create((set) => ({
     email: '',
     password: '',
   },
-
+  token: null,
   user: null,
+  logError: null,
 
   updateLoginForm: (e) => {
     const { name, value } = e.target;
@@ -41,6 +42,12 @@ const authStore = create((set) => ({
     try {
       const { loginForm } = authStore.getState();
       const response = await axios.post('/login', loginForm);
+      //console.log(response.data);
+
+      const token = response.data;
+
+      set({ token });
+      Cookies.set('token', token, { expires: 2000000 });
 
       set({
         loggedIn: true,
@@ -51,8 +58,9 @@ const authStore = create((set) => ({
         user: 'userInfo',
       });
 
-      console.log(response);
+      //console.log(response);
     } catch (error) {
+      set({ logError: 'Invalid User name or password' });
       console.log(error.message);
     }
   },
@@ -63,7 +71,7 @@ const authStore = create((set) => ({
       set({ loggedIn: true });
     } catch (error) {
       set({ loggedIn: false });
-      console.log(error.message);
+      console.log(error.message, error);
     }
   },
   signup: async () => {
@@ -78,6 +86,7 @@ const authStore = create((set) => ({
   },
   logout: async () => {
     await axios.get('/logout');
+    Cookies.remove('token');
     set({ loggedIn: false });
   },
 }));

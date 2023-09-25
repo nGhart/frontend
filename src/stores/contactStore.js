@@ -22,7 +22,7 @@ const contactStore = create((set) => ({
       const response = await axios.get('/contacts');
       set({ contacts: response.data.contacts });
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   },
   updateCreateContacts: (e) => {
@@ -44,10 +44,7 @@ const contactStore = create((set) => ({
     try {
       e.preventDefault();
       const { createContact, contacts } = contactStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/contacts',
-        createContact
-      );
+      const response = await axios.post('/contacts', createContact);
       set({
         contacts: [...contacts, response.data.contact],
         createContact: {
@@ -63,9 +60,7 @@ const contactStore = create((set) => ({
   },
   deleteContact: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/contacts/${_id}`
-      );
+      const response = await axios.delete(`/contacts/${_id}`);
       const { contacts } = contactStore.getState();
 
       const newContacts = contacts.filter((item) => {
@@ -120,15 +115,12 @@ const contactStore = create((set) => ({
         },
         contacts,
       } = contactStore.getState();
-      const response = await axios.put(
-        `http://localhost:1994/contacts/${_id}`,
-        {
-          contactName,
-          contactNumber,
-          contactEmail,
-          contactGroup,
-        }
-      );
+      const response = await axios.put(`/contacts/${_id}`, {
+        contactName,
+        contactNumber,
+        contactEmail,
+        contactGroup,
+      });
 
       const newContacts = [...contacts];
       const contactIndex = contacts.findIndex((item) => {

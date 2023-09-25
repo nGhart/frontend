@@ -58,10 +58,7 @@ const invoiceStore = create((set) => ({
     try {
       e.preventDefault();
       const { createInvoice, invoices } = invoiceStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/invoices',
-        createInvoice
-      );
+      const response = await axios.post('/invoices', createInvoice);
       set({
         invoices: [...invoices, response.data.invoice],
         createInvoice: {
@@ -84,9 +81,7 @@ const invoiceStore = create((set) => ({
   },
   deleteInvoice: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/invoices/${_id}`
-      );
+      const response = await axios.delete(`/invoices/${_id}`);
       const { invoices } = invoiceStore.getState();
 
       const newInvoices = invoices.filter((item) => {
@@ -155,22 +150,19 @@ const invoiceStore = create((set) => ({
         },
         invoices,
       } = invoiceStore.getState();
-      const response = await axios.put(
-        `http://localhost:1994/invoices/${_id}`,
-        {
-          clientName,
-          clientEmail,
-          clientNumber,
-          buckPrice,
-          clientBuckCount,
-          doePrice,
-          clientDoeCount,
-          kitPrice,
-          clientKitCount,
-          manurePrice,
-          clientManureCount,
-        }
-      );
+      const response = await axios.put(`/invoices/${_id}`, {
+        clientName,
+        clientEmail,
+        clientNumber,
+        buckPrice,
+        clientBuckCount,
+        doePrice,
+        clientDoeCount,
+        kitPrice,
+        clientKitCount,
+        manurePrice,
+        clientManureCount,
+      });
 
       const newInvoices = [...invoices];
       const invoiceIndex = invoices.findIndex((item) => {

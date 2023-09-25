@@ -11,7 +11,7 @@ const ChartBox = () => {
   const [females, setFemales] = useState([]);
   useEffect(() => {
     store.getAnimals();
-  }, [store]);
+  }, [store.animals]);
   const animals = store.animals || [];
   useEffect(() => {
     const maleAnimals = animals.filter((item) => item.sex === 'Male');

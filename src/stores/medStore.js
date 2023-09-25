@@ -44,7 +44,7 @@ const medStore = create((set) => ({
       e.preventDefault();
       const { createMed, meds } = medStore.getState();
       const response = await axios.post(
-        'http://localhost:1994/meds',
+        '/meds',
         createMed
       );
       set({
@@ -62,7 +62,7 @@ const medStore = create((set) => ({
   },
   deleteMed: async (_id) => {
     try {
-      const response = await axios.delete(`http://localhost:1994/meds/${_id}`);
+      const response = await axios.delete(`/meds/${_id}`);
       const { meds } = medStore.getState();
 
       const newMeds = meds.filter((item) => {
@@ -111,7 +111,7 @@ const medStore = create((set) => ({
         updateFormMed: { name, number, expiryDate, supplier, _id },
         meds,
       } = medStore.getState();
-      const response = await axios.put(`http://localhost:1994/meds/${_id}`, {
+      const response = await axios.put(`/meds/${_id}`, {
         name,
         number,
         expiryDate,

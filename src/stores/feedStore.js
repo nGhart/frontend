@@ -45,10 +45,7 @@ const feedStore = create((set) => ({
     try {
       e.preventDefault();
       const { createFeed, feeds } = feedStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/feeds',
-        createFeed
-      );
+      const response = await axios.post('/feeds', createFeed);
       set({
         feeds: [...feeds, response.data.feed],
         createFeed: {
@@ -64,7 +61,7 @@ const feedStore = create((set) => ({
   },
   deleteFeed: async (_id) => {
     try {
-      const response = await axios.delete(`http://localhost:1994/feeds/${_id}`);
+      const response = await axios.delete(`/feeds/${_id}`);
       const { feeds } = feedStore.getState();
 
       const newFeeds = feeds.filter((item) => {
@@ -121,7 +118,7 @@ const feedStore = create((set) => ({
         },
         feeds,
       } = feedStore.getState();
-      const response = await axios.put(`http://localhost:1994/feeds/${_id}`, {
+      const response = await axios.put(`/feeds/${_id}`, {
         feedName,
         feedQuantity,
         feedDatePurchased,

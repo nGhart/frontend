@@ -23,7 +23,9 @@ const diseaseStore = create((set) => ({
 
   getDiseases: async () => {
     try {
-      const response = await axios.get('/diseases');
+      const response = await axios.get(
+        'https://server2-763m.onrender.com/diseases'
+      );
       set({ diseases: response.data.diseases });
     } catch (error) {
       console.log(error);
@@ -49,10 +51,7 @@ const diseaseStore = create((set) => ({
     try {
       e.preventDefault();
       const { createDisease, diseases } = diseaseStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/diseases',
-        createDisease
-      );
+      const response = await axios.post('/diseases', createDisease);
       set({
         diseases: [...diseases, response.data.disease],
         createDisease: {
@@ -70,9 +69,7 @@ const diseaseStore = create((set) => ({
   },
   deleteDisease: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/diseases/${_id}`
-      );
+      const response = await axios.delete(`/diseases/${_id}`);
       const { diseases } = diseaseStore.getState();
 
       const newDiseases = diseases.filter((item) => {
@@ -133,17 +130,14 @@ const diseaseStore = create((set) => ({
         },
         diseases,
       } = diseaseStore.getState();
-      const response = await axios.put(
-        `http://localhost:1994/diseases/${_id}`,
-        {
-          diseaseAnimal,
-          diseaseCondition,
-          diseaseManagement,
-          diseaseDuration,
-          diseaseOutcome,
-          diseaseDate,
-        }
-      );
+      const response = await axios.put(`/diseases/${_id}`, {
+        diseaseAnimal,
+        diseaseCondition,
+        diseaseManagement,
+        diseaseDuration,
+        diseaseOutcome,
+        diseaseDate,
+      });
 
       const newDiseases = [...diseases];
       const diseaseIndex = diseases.findIndex((item) => {

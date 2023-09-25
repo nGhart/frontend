@@ -18,9 +18,9 @@
     background-color: rgba(203, 194, 110, 0.565);
     border-radius: 50%;
     padding: 10px;
-    @include sm {
-      width: 400px;
-    }
+    // @include sm {
+    //   width: 400px;
+    // }
     @include xs {
       height: 300px;
       width: 90%;

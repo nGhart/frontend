@@ -20,7 +20,7 @@ const vaccinationStore = create((set) => ({
       const response = await axios.get('/vaccinations');
       set({ vaccinations: response.data.vaccinations });
     } catch (error) {
-      console.log(error);
+      console.log(error.mes);
     }
   },
   updateCreateVaccinations: (e) => {
@@ -43,10 +43,7 @@ const vaccinationStore = create((set) => ({
     try {
       e.preventDefault();
       const { createVaccination, vaccinations } = vaccinationStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/vaccinations',
-        createVaccination
-      );
+      const response = await axios.post('/vaccinations', createVaccination);
       set({
         vaccinations: [...vaccinations, response.data.vaccination],
         createVaccination: {
@@ -61,9 +58,7 @@ const vaccinationStore = create((set) => ({
   },
   deleteVaccination: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/vaccinations/${_id}`
-      );
+      const response = await axios.delete(`/vaccinations/${_id}`);
       const { vaccinations } = vaccinationStore.getState();
 
       const newVaccinations = vaccinations.filter((item) => {
@@ -113,14 +108,11 @@ const vaccinationStore = create((set) => ({
         updateFormVaccination: { medication, date, nextDate, _id },
         vaccinations,
       } = vaccinationStore.getState();
-      const response = await axios.put(
-        `http://localhost:1994/vaccinations/${_id}`,
-        {
-          medication,
-          date,
-          nextDate,
-        }
-      );
+      const response = await axios.put(`/vaccinations/${_id}`, {
+        medication,
+        date,
+        nextDate,
+      });
 
       const newVaccinations = [...vaccinations];
       const vaccinationIndex = vaccinations.findIndex((item) => {

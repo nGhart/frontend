@@ -32,7 +32,7 @@ const Employees = () => {
   }
 
   return (
-    <div>
+    <div className="plural">
       <Table bordered hover size="sm">
         <thead>
           <tr>

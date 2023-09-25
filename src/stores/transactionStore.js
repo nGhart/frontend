@@ -55,10 +55,7 @@ const transactionStore = create((set) => ({
     try {
       e.preventDefault();
       const { createTransaction, transactions } = transactionStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/transactions',
-        createTransaction
-      );
+      const response = await axios.post('/transactions', createTransaction);
       set({
         transactions: [...transactions, response.data.transaction],
         createTransaction: {
@@ -76,9 +73,7 @@ const transactionStore = create((set) => ({
   },
   deleteTransaction: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/transactions/${_id}`
-      );
+      const response = await axios.delete(`/transactions/${_id}`);
       const { transactions } = transactionStore.getState();
 
       const newTransactions = transactions.filter((item) => {
@@ -137,17 +132,14 @@ const transactionStore = create((set) => ({
         },
         transactions,
       } = transactionStore.getState();
-      const response = await axios.put(
-        `http://localhost:1994/transactions/${_id}`,
-        {
-          name,
-          category,
-          price,
-          payment,
-          transactionType,
-          date,
-        }
-      );
+      const response = await axios.put(`/transactions/${_id}`, {
+        name,
+        category,
+        price,
+        payment,
+        transactionType,
+        date,
+      });
 
       const newTransactions = [...transactions];
       const transactionIndex = transactions.findIndex((item) => {

@@ -29,7 +29,7 @@ const profileStore = create((set) => ({
 
   getProfiles: async () => {
     try {
-      const response = await axios.get('/profiles'); // Assuming you have an endpoint for profiles
+      const response = await axios.get('/profiles');
       set({ profiles: response.data.profiles });
     } catch (error) {
       console.log(error.message);
@@ -54,10 +54,7 @@ const profileStore = create((set) => ({
     try {
       e.preventDefault();
       const { createProfile, profiles } = profileStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/profiles', // Assuming you have an endpoint for profiles
-        createProfile
-      );
+      const response = await axios.post('/profiles', createProfile);
       set({
         profiles: [...profiles, response.data.profile],
         createProfile: {
@@ -78,9 +75,7 @@ const profileStore = create((set) => ({
   },
   deleteProfile: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/profiles/${_id}` // Assuming you have an endpoint for profiles
-      );
+      const response = await axios.delete(`/profiles/${_id}`);
       const { profiles } = profileStore.getState();
 
       const newProfiles = profiles.filter((item) => {
@@ -145,20 +140,17 @@ const profileStore = create((set) => ({
         },
         profiles,
       } = profileStore.getState();
-      const response = await axios.put(
-        `http://localhost:1994/profiles/${_id}`, // Assuming you have an endpoint for profiles
-        {
-          name,
-          email,
-          number1,
-          number2,
-          building,
-          street,
-          city,
-          country,
-          logo,
-        }
-      );
+      const response = await axios.put(`/profiles/${_id}`, {
+        name,
+        email,
+        number1,
+        number2,
+        building,
+        street,
+        city,
+        country,
+        logo,
+      });
 
       const newProfiles = [...profiles];
       const profileIndex = profiles.findIndex((item) => {

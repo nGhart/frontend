@@ -48,7 +48,7 @@ const quarantineStore = create((set) => ({
       e.preventDefault();
       const { createQuarantine, quarantines } = quarantineStore.getState();
       const response = await axios.post(
-        'http://localhost:1994/quarantines',
+        '/quarantines',
         createQuarantine
       );
       set({
@@ -68,7 +68,7 @@ const quarantineStore = create((set) => ({
   deleteQuarantine: async (_id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:1994/quarantines/${_id}`
+        `/quarantines/${_id}`
       );
       const { quarantines } = quarantineStore.getState();
 
@@ -129,7 +129,7 @@ const quarantineStore = create((set) => ({
         quarantines,
       } = quarantineStore.getState();
       const response = await axios.put(
-        `http://localhost:1994/quarantines/${_id}`,
+        `/quarantines/${_id}`,
         {
           animal,
           condition,

@@ -47,10 +47,7 @@ const inventoryStore = create((set) => ({
     try {
       e.preventDefault();
       const { createInventory, inventories } = inventoryStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/inventories',
-        createInventory
-      );
+      const response = await axios.post('/inventories', createInventory);
       set({
         inventories: [...inventories, response.data.inventory],
         createInventory: {
@@ -67,9 +64,7 @@ const inventoryStore = create((set) => ({
   },
   deleteInventory: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/inventories/${_id}`
-      );
+      const response = await axios.delete(`/inventories/${_id}`);
       const { inventories } = inventoryStore.getState();
 
       const newInventories = inventories.filter((item) => {
@@ -128,16 +123,13 @@ const inventoryStore = create((set) => ({
         },
         inventories,
       } = inventoryStore.getState();
-      const response = await axios.put(
-        `http://localhost:1994/inventories/${_id}`,
-        {
-          inventoryName,
-          inventoryNumber,
-          inventoryDate,
-          inventoryPrice,
-          inventorySalePrice,
-        }
-      );
+      const response = await axios.put(`/inventories/${_id}`, {
+        inventoryName,
+        inventoryNumber,
+        inventoryDate,
+        inventoryPrice,
+        inventorySalePrice,
+      });
 
       const newInventories = [...inventories];
       const inventoryIndex = inventories.findIndex((item) => {

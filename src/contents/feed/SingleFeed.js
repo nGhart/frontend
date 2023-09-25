@@ -44,6 +44,7 @@ const SingleFeed = ({ item, index }) => {
 
   function addDaysToDate(originalDate, daysToAdd) {
     const date = new Date(originalDate);
+    //console.log('date', date);
     date.setDate(date.getDate() + daysToAdd);
     const year = date.getUTCFullYear();
     const month = String(date.getUTCMonth() + 1).padStart(2, '0');

@@ -15,8 +15,8 @@ const RequireAuth = (props) => {
     }
   }, []);
   if (store.loggedIn === null) {
-    // return <div>Loading</div>;
-    return <Loading />;
+    return <div>Loading</div>;
+    //return <Loading />;
   }
   //if not logged in redirect to log in page
   if (store.loggedIn === false) {

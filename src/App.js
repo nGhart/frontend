@@ -36,13 +36,24 @@ import ProfilePage from './pages/profilePage/ProfilePage';
 
 const Layout = () => {
   return (
-    <div className="mainSection">
+    <div
+      className="mainSection"
+      style={{
+        position: 'relative',
+      }}
+    >
       <Navigation />
-      <div className="midSection">
+      <div
+        className="midSection"
+        // style={{
+        //   minHeight: 'calc(100vh-106px)',
+        //   maxHeight: 'calc(100vh-106px)',
+        // }}
+      >
         <div className="menuSection">
           <Menu />
         </div>
-        <div className="contentSection" style={{ position: 'relative' }}>
+        <div className="contentSection">
           <Outlet />
         </div>
       </div>
@@ -51,6 +62,7 @@ const Layout = () => {
   );
 };
 
+//change;
 export const makeApiRequest = async (url, method, data = null) => {
   try {
     const response = await axios[method](url, data);
@@ -71,7 +83,7 @@ const router = createBrowserRouter(
             <Layout />
           </RequireAuth>
         }
-        // element={<Layout />}
+        //element={<Layout />}
       >
         <Route path="/" element={<Home />} />
         <Route path="animals" element={<AnimalTable />}></Route>

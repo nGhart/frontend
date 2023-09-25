@@ -1,14 +1,12 @@
 @import '../styles/variables.scss';
 @import '../styles/responsive.scss';
 .startPage {
-  //display: flex;
+  display: flex;
   padding: 20px;
   .startImage {
-    //flex: 2;
+    flex: 2;
   }
   .signForm {
-    // flex: 1;
-    background-color: $main-color;
-    padding: 30px;
+    flex: 1;
   }
 }

@@ -12,22 +12,22 @@ const LogoutPage = () => {
     store.logout();
   }, [store]);
   return (
-    <Container fluid className="logoutSection">
-      <Row>
-        <Col
-          // xs={{ span: 10, offset: 1 }}
-          className="logoutContainer"
-        >
-          <h1 className="font5">Rabbit Records</h1>
+    <div fluid className="logoutSection">
+      {/* <Row> */}
+      <div
+        // xs={{ span: 10, offset: 1 }}
+        className="logoutContainer"
+      >
+        <h1 className="font5">Rabbit Records</h1>
 
-          <h3>You are now logged out</h3>
+        <h3>You are now logged out</h3>
 
-          <Link to="/login">
-            <button className="formButtons">Log in</button>
-          </Link>
-        </Col>
-      </Row>
-    </Container>
+        <Link to="/login">
+          <button className="formButtons">Log in</button>
+        </Link>
+      </div>
+      {/* </Row> */}
+    </div>
   );
 };
 

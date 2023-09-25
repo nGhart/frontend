@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import transactionStore from '../../stores/transactionStore';
+import transactionStore from '../stores/transactionStore';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Stack from 'react-bootstrap/Stack';
@@ -9,7 +9,7 @@ const TransactionSummary = () => {
 
   useEffect(() => {
     store.getTransactions();
-  }, [store]);
+  }, [store.transactions]);
 
   useEffect(() => {
     if (store.transactions) {

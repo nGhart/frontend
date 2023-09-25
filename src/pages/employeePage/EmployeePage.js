@@ -3,8 +3,6 @@ import AddEmployee from '../../contents/employees/AddEmployee';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Employees from '../../contents/employees/EmployeeList';
 import employeeStore from '../../stores/employeeStore';
 
@@ -14,7 +12,7 @@ const EmployeePage = () => {
     store.getEmployees();
   }, [store]);
   return (
-    <div>
+    <div className="page">
       <header className="App-header">
         <Navbar style={{ backgroundColor: 'rgb(14, 73, 60)' }}>
           <Container>
@@ -29,13 +27,11 @@ const EmployeePage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <Col md={12}>
-            <Employees />
-          </Col>
-        </Row>
-      </Container>
+      <div style={{ marginTop: '10px', width: '100%' }}>
+        <div xs={12}>
+          <Employees />
+        </div>
+      </div>
     </div>
   );
 };

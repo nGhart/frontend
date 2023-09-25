@@ -51,10 +51,7 @@ const employeeStore = create((set) => ({
     try {
       e.preventDefault();
       const { createEmployee, employees } = employeeStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/employees',
-        createEmployee
-      );
+      const response = await axios.post('/employees', createEmployee);
       set({
         employees: [...employees, response.data.employee],
         createEmployee: {
@@ -73,9 +70,7 @@ const employeeStore = create((set) => ({
   },
   deleteEmployee: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/employees/${_id}`
-      );
+      const response = await axios.delete(`/employees/${_id}`);
       const { employees } = employeeStore.getState();
 
       const newEmployees = employees.filter((item) => {
@@ -138,18 +133,15 @@ const employeeStore = create((set) => ({
         employees,
       } = employeeStore.getState();
 
-      const response = await axios.put(
-        `http://localhost:1994/employees/${_id}`,
-        {
-          employeeName,
-          employeeRole,
-          employeeNumber,
-          employeeDepartment,
-          employeeSalary,
-          employeeStartDate,
-          employeeEndDate,
-        }
-      );
+      const response = await axios.put(`/employees/${_id}`, {
+        employeeName,
+        employeeRole,
+        employeeNumber,
+        employeeDepartment,
+        employeeSalary,
+        employeeStartDate,
+        employeeEndDate,
+      });
 
       const newEmployees = [...employees];
       const employeeIndex = employees.findIndex((item) => {

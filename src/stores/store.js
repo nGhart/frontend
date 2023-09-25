@@ -59,7 +59,9 @@ const animalStore = create((set) => ({
   //functions
   getAnimals: async () => {
     try {
-      const response = await axios.get('/animals');
+      const response = await axios.get('/animals', {
+        user: '64fce31fe368d413452cc3d4',
+      });
       set({ animals: response.data.animals });
     } catch (error) {
       console.log(error);
@@ -85,10 +87,7 @@ const animalStore = create((set) => ({
     try {
       e.preventDefault();
       const { createAnimal, animals } = animalStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/animals',
-        createAnimal
-      );
+      const response = await axios.post('/animals', createAnimal);
       set({
         animals: [...animals, response.data.animal],
         createAnimal: {
@@ -123,9 +122,7 @@ const animalStore = create((set) => ({
   },
   deleteAnimal: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/animals/${_id}`
-      );
+      const response = await axios.delete(`/animals/${_id}`);
       const { animals } = animalStore.getState();
 
       const newAnimals = animals.filter((item) => {
@@ -218,7 +215,7 @@ const animalStore = create((set) => ({
         },
         animals,
       } = animalStore.getState();
-      const response = await axios.put(`http://localhost:1994/animals/${_id}`, {
+      const response = await axios.put(`/animals/${_id}`, {
         name,
         sex,
         dob,

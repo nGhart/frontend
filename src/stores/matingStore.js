@@ -49,10 +49,7 @@ const matingStore = create((set) => ({
     try {
       e.preventDefault();
       const { createMating, matings } = matingStore.getState();
-      const response = await axios.post(
-        'http://localhost:1994/matings',
-        createMating
-      );
+      const response = await axios.post('/matings', createMating);
       set({
         matings: [...matings, response.data.mating],
         createMating: {
@@ -70,9 +67,7 @@ const matingStore = create((set) => ({
   },
   deleteMating: async (_id) => {
     try {
-      const response = await axios.delete(
-        `http://localhost:1994/matings/${_id}`
-      );
+      const response = await axios.delete(`/matings/${_id}`);
       const { matings } = matingStore.getState();
 
       const newMatings = matings.filter((item) => {
@@ -134,7 +129,7 @@ const matingStore = create((set) => ({
         },
         matings,
       } = matingStore.getState();
-      const response = await axios.put(`http://localhost:1994/matings/${_id}`, {
+      const response = await axios.put(`/matings/${_id}`, {
         matingDoe,
         matingBuck,
         matingDate1,

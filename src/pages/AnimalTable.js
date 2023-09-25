@@ -15,7 +15,7 @@ const AnimalTable = () => {
   }, [store]);
 
   return (
-    <>
+    <div>
       <Navbar
         className="headers"
         style={{ backgroundColor: 'rgb(14, 73, 60)' }}
@@ -39,7 +39,7 @@ const AnimalTable = () => {
           </div>
         </Row>
       </Container>
-    </>
+    </div>
   );
 };
 
