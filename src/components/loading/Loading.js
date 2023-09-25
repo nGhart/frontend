@@ -3,8 +3,8 @@ import Spinner from 'react-bootstrap/Spinner';
 
 const Loading = () => {
   return (
-    <div>
-      <div className="loadingSection">
+    <div className="loadingSection">
+      <div>
         <Spinner animation="border" variant="success" className="spinner" />
       </div>
     </div>
