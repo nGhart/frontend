@@ -33,7 +33,7 @@ const Animals = () => {
 
   return (
     <div>
-      <Table bordered hover>
+      <Table bordered hover style={{ width: '100%' }}>
         <thead>
           <tr>
             <th></th>
