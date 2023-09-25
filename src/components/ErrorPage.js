@@ -4,10 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 const ErrorPage = ({ message }) => {
   return (
     <>
-      <Alert
-        // className="errorContainer"
-        variant="danger"
-      >
+      <Alert variant="danger">
         <h4>{message}</h4>
       </Alert>
     </>
