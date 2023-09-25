@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import authStore from '../../stores/authStore';
 import { Link, useNavigate } from 'react-router-dom';
@@ -7,6 +7,7 @@ import './loginForm.scss';
 const LoginForm = () => {
   const store = authStore();
   const navigate = useNavigate();
+  const [logError, setLogError] = useState('');
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -39,7 +40,7 @@ const LoginForm = () => {
             placeholder="Password"
           />
         </Form.Group>
-
+        <p>{logError}</p>
         <button className="formButtons" type="submit">
           Log in
         </button>
