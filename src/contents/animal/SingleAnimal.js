@@ -46,8 +46,11 @@ const SingleAnimal = ({ item, index }) => {
 
   function getAge(date) {
     const dob = new Date(date);
+    //console.log('dob', dob);
     const today = new Date();
+    //console.log('today', today);
     const diff = today - dob;
+    //console.log('diff', diff);
     const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
     return age;
   }
@@ -142,7 +145,8 @@ const SingleAnimal = ({ item, index }) => {
                         justifyContent: 'space-between',
                       }}
                     >
-                      <span>DOB</span> {item.dob}
+                      <span>DOB</span>
+                      {item.dob}
                     </p>
                     <p
                       style={{
@@ -158,7 +162,9 @@ const SingleAnimal = ({ item, index }) => {
                         justifyContent: 'space-between',
                       }}
                     >
-                      <span>AGE</span> {getAge(item.dob)} weeks
+                      <span>AGE</span>
+                      {getAge(item.dob)}
+                      weeks
                     </p>
 
                     <p
