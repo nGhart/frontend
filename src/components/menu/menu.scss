@@ -7,10 +7,10 @@
     gap: 10px;
     margin-bottom: 15px;
     .menuTitle {
-      font-size: 14px;
-      font-family: 'Yatra One', cursive;
-      font-family: 'Shrikhand', cursive;
+      font-size: 16px;
+      font-family: 'Righteous', cursive;
       color: rgb(231, 226, 212);
+      font-size: 16px;
       color: $soft-color;
       @include lg {
         display: none;

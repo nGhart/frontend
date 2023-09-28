@@ -32,7 +32,7 @@ function Todolist() {
     );
   };
   return (
-    <div>
+    <div className="reminderContainer">
       <h5 className="toTitle">To Do List</h5>
       <Todoform onSubmit={addToDo} />
       <Todo

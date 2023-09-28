@@ -35,23 +35,13 @@ const SingleAnimal = ({ item, index }) => {
   const handleShow = () => setShow(true);
   const handleCloseModal = () => setShowModal(false);
 
-  let dob = item.dob;
   function getAge(dob) {
     const birthD = new Date(dob);
+    //console.log("birthD",birthD)
     const today = new Date();
     const dif = today - birthD;
+    //console.log("dif",dif)
     const age = Math.floor(dif / (1000 * 60 * 60 * 24 * 7));
-    return age;
-  }
-
-  function getAge(date) {
-    const dob = new Date(date);
-    //console.log('dob', dob);
-    const today = new Date();
-    //console.log('today', today);
-    const diff = today - dob;
-    //console.log('diff', diff);
-    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
     return age;
   }
 
@@ -63,7 +53,7 @@ const SingleAnimal = ({ item, index }) => {
         <td>{item.breed}</td>
         <td>{item.sex}</td>
         <td>{item.bred}</td>
-        <td>{item.dob}</td>
+        <td>{item.dob.slice(0, 10)}</td>
         <td>{getAge(item.dob)}</td>
         <td>{item.weaning}</td>
         <td>{item.weightCurrent}</td>

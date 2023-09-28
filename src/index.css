@@ -34,7 +34,7 @@ code {
 .font6 {
   font-family: 'Shrikhand', cursive;
 }
-.font6 {
+.font7 {
   font-family: 'Yatra One', cursive;
 }
 .cText {
@@ -180,4 +180,7 @@ ul {
 .activePage {
   background-color: rgb(26, 44, 40);
   color: white;
+}
+.tableContainer {
+  width: 100%;
 }

@@ -15,10 +15,22 @@ const VaccinationSummary = () => {
     const vacc = (store.vaccinations || []).slice(-3);
     setRecentVaccinations(vacc);
   }, [store.vaccinations]);
+
+  function addDaysToDate(originalDate, daysToAdd) {
+    const date = new Date(originalDate);
+    date.setDate(date.getDate() + daysToAdd);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}T00:00:00.000Z`;
+    return formattedDate.slice(0, 10);
+  }
+
   return (
     <Container>
       <Row>
-        <h3 className="font2">Vaccination Summary</h3>
+        <h3 className="font2">Upcoming Vaccinations</h3>
       </Row>
       <Row>
         <Stack className="font1" gap={2}>
@@ -27,7 +39,7 @@ const VaccinationSummary = () => {
               return (
                 <div className="p-2 homeBack around" key={item._id}>
                   <span>{item.medication}</span>{' '}
-                  <span>Due: {item.nextDate.slice(0, 10)}</span>
+                  <span>Due: {addDaysToDate(item.date, item.nextDate)}</span>
                 </div>
               );
             })}

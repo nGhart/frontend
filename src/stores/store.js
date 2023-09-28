@@ -59,9 +59,10 @@ const animalStore = create((set) => ({
   //functions
   getAnimals: async () => {
     try {
-      const response = await axios.get('/animals', {
-        user: '64fce31fe368d413452cc3d4',
-      });
+      // const response = await axios.get('/animals', {
+      //   user: '64fce31fe368d413452cc3d4',
+      // });
+      const response = await axios.get('/animals');
       set({ animals: response.data.animals });
     } catch (error) {
       console.log(error);

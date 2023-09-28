@@ -39,8 +39,8 @@ const SingleMating = ({ item, index }) => {
         <td>{index + 1}</td>
         <td>{item.matingDoe}</td>
         <td>{item.matingBuck}</td>
-        <td>{item.matingDate1}</td>
-        <td>{item.matingDate2}</td>
+        <td>{item.matingDate1.slice(0, 10)}</td>
+        <td>{item.matingDate2.slice(0, 10)}</td>
         <td>{addDaysToDate(item.matingDate2, 28)}</td>
         <td>{item.nesting}</td>
         <td>{item.kindling}</td>

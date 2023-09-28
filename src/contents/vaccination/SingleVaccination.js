@@ -20,13 +20,25 @@ const SingleVaccination = ({ item, index }) => {
   };
   const handleCloseModal = () => setShowModal(false);
 
+  function addDaysToDate(originalDate, daysToAdd) {
+    const date = new Date(originalDate);
+    date.setDate(date.getDate() + daysToAdd);
+    const year = date.getUTCFullYear();
+    const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(date.getUTCDate()).padStart(2, '0');
+
+    const formattedDate = `${year}-${month}-${day}T00:00:00.000Z`;
+    return formattedDate.slice(0, 10);
+  }
+
   return (
     <>
       <tr key={item._id}>
         <td>{index + 1}</td>
         <td>{item.medication}</td>
-        <td>{item.date}</td>
+        <td>{item.date.slice(0, 10)}</td>
         <td>{item.nextDate}</td>
+        <td>{addDaysToDate(item.date, item.nextDate)}</td>
         <td>
           <div className="around actionIcons">
             <button className="actionIcons" onClick={handleOpenModal}>

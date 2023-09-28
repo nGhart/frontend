@@ -4,7 +4,6 @@ import Contacts from '../../contents/contacts/Contacts';
 import contactStore from '../../stores/contactStore';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row';
 
 const ContactPage = () => {
   const store = contactStore();
@@ -29,13 +28,9 @@ const ContactPage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Contacts />
-          </div>
-        </Row>
-      </Container>
+      <div className="tableContainer">
+        <Contacts />
+      </div>
     </div>
   );
 };

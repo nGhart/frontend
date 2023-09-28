@@ -63,28 +63,24 @@ const Invoices = () => {
       <div className="flex">
         <Pagination>
           <Pagination.Item>
-            <a href="#" onClick={prevPage} style={{ color: 'black' }}>
+            <i onClick={prevPage} style={{ color: 'black' }}>
               Prev
-            </a>
+            </i>
           </Pagination.Item>
           {numbers.map((item) => (
             <Pagination.Item
               key={item}
               className={`${currentPage === item ? 'activePage' : ''}`}
             >
-              <a
-                href="#"
-                onClick={() => changePage(item)}
-                style={{ color: 'black' }}
-              >
+              <i onClick={() => changePage(item)} style={{ color: 'black' }}>
                 {item}
-              </a>
+              </i>
             </Pagination.Item>
           ))}
           <Pagination.Item>
-            <a href="#" onClick={nextPage} style={{ color: 'black' }}>
+            <i onClick={nextPage} style={{ color: 'black' }}>
               Next
-            </a>
+            </i>
           </Pagination.Item>
         </Pagination>
       </div>

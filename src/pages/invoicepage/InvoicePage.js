@@ -4,7 +4,6 @@ import Invoices from '../../contents/invoice/Invoices';
 import invoiceStore from '../../stores/invoiceStore';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row';
 
 const InvoicePage = () => {
   const store = invoiceStore();
@@ -30,13 +29,9 @@ const InvoicePage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Invoices />
-          </div>
-        </Row>
-      </Container>
+      <div className="tableContainer">
+        <Invoices />
+      </div>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const EditVaccination = ({
       <Form.Group className="mb-3" controlId="nextDate">
         <Form.Label>Next Date *</Form.Label>
         <Form.Control
-          type="date"
+          type="number"
           name="nextDate"
           onChange={handleUpdateVaccination}
           value={updateFormVaccination.nextDate}

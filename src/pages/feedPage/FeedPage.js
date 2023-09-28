@@ -4,7 +4,6 @@ import Feeds from '../../contents/feed/Feeds';
 import feedStore from '../../stores/feedStore';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row';
 
 const FeedPage = () => {
   const store = feedStore();
@@ -28,13 +27,9 @@ const FeedPage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Feeds />
-          </div>
-        </Row>
-      </Container>
+      <div className="tableContainer">
+        <Feeds />
+      </div>
     </div>
   );
 };

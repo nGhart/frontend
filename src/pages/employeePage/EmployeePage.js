@@ -27,10 +27,11 @@ const EmployeePage = () => {
           </Container>
         </Navbar>
       </header>
-      <div style={{ marginTop: '10px', width: '100%' }}>
-        <div xs={12}>
-          <Employees />
-        </div>
+      <div
+        className="tableContainer"
+        //style={{ width: '100%' }}
+      >
+        <Employees />
       </div>
     </div>
   );

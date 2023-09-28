@@ -5,7 +5,6 @@ import AddAnimal from '../contents/animal/AddAnimal';
 import '../contents/animal/animal.css';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row';
 
 const AnimalTable = () => {
   const store = animalStore();
@@ -32,13 +31,10 @@ const AnimalTable = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Animals />
-          </div>
-        </Row>
-      </Container>
+
+      <div className="tableContainer">
+        <Animals />
+      </div>
     </div>
   );
 };

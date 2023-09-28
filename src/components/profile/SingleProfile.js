@@ -4,9 +4,8 @@ import EditProfile from './EditProfile';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
 import './profile.scss';
-const SingleProfile = ({ item, index }) => {
+const SingleProfile = ({ item }) => {
   const store = profileStore((store) => {
     return {
       editProfile: store.editProfile,
@@ -24,41 +23,40 @@ const SingleProfile = ({ item, index }) => {
   const handleCloseModal = () => setShowModal(false);
 
   return (
-    <Container className="flex">
-      <Row key={item._id} className="profileContainer">
-        <Col className="imageContainer">
-          <img src={item.logo} alt="Logo" />
-        </Col>
-        <Col className="detailsContainer font1">
-          <h3>Business Name: {item.name}</h3>
-          <h3>Email: {item.email}</h3>
-          <h3>Number: {item.number1}</h3>
-          <h3>Number 2: {item.number2}</h3>
-          <Row>
-            <Col>
-              <h3>Address: </h3>
-            </Col>
-            <Col>
-              <h4>{item.building}</h4>
-              <h4>{item.street}</h4>
-              <h4>{item.city}</h4>
-              <h4>{item.country}</h4>
-            </Col>
-          </Row>
+    <>
+      <Col xs={5} key={item._id} className="profileContainer">
+        <Row className="div1">
+          <Col xs={4} className="imageContainer">
+            <img src={item.logo} alt="Logo" />
+          </Col>
+          <Col xs={8} className="detailsContainer font2">
+            <h6>Business Name: {item.name}</h6>
+            <h6>Email: {item.email}</h6>
+            <h6>Number: {item.number1}</h6>
+            <h6>Number 2: {item.number2}</h6>
+            <Row>
+              <Col xs={4}>
+                <h6>Address: </h6>
+              </Col>
+              <Col>
+                <h6>{item.building}</h6>
+                <h6>{item.street}</h6>
+                <h6>{item.city}</h6>
+                <h6>{item.country}</h6>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        <Row className="profileButtons">
+          <button className="" onClick={handleOpenModal}>
+            Update Profile
+          </button>
+          <button className="" onClick={() => store.deleteProfile(item._id)}>
+            Delete
+          </button>
+        </Row>
+      </Col>
 
-          <div className="formButtonsContainer">
-            <button className="formButtons" onClick={handleOpenModal}>
-              Update Profile
-            </button>
-            <button
-              className="formButtons"
-              onClick={() => store.deleteProfile(item._id)}
-            >
-              Delete
-            </button>
-          </div>
-        </Col>
-      </Row>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>
           <Modal.Title>Update Profile</Modal.Title>
@@ -72,7 +70,7 @@ const SingleProfile = ({ item, index }) => {
           />
         </Modal.Body>
       </Modal>
-    </Container>
+    </>
   );
 };
 

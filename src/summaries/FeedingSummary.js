@@ -47,7 +47,7 @@ const FeedingSummary = () => {
   return (
     <Container>
       <Row>
-        <h3 className="font2">Feed Summary</h3>
+        <h3 className="font2">Feed Restock Date</h3>
       </Row>
       <Stack className="font1" direction="horizontal" gap={2}>
         {recentFeeds &&

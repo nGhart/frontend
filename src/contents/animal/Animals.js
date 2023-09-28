@@ -32,7 +32,7 @@ const Animals = () => {
   }
 
   return (
-    <div>
+    <div style={{ height: '100%', position: 'relative' }}>
       <Table bordered hover style={{ width: '100%' }}>
         <thead>
           <tr>
@@ -55,31 +55,41 @@ const Animals = () => {
           })}
         </tbody>
       </Table>
-      <div className="flex">
+      <div
+        //className="flex"
+        style={{
+          position: 'absolute',
+          bottom: '0',
+
+          width: '100%',
+          display: 'flex',
+          justifyContent: 'center',
+        }}
+      >
         <Pagination>
           <Pagination.Item>
-            <a href="#" onClick={prevPage} style={{ color: 'black' }}>
+            <i href="#" onClick={prevPage} style={{ color: 'black' }}>
               Prev
-            </a>
+            </i>
           </Pagination.Item>
           {numbers.map((item) => (
             <Pagination.Item
               key={item}
               className={`${currentPage === item ? 'activePage' : ''}`}
             >
-              <a
+              <i
                 href="#"
                 onClick={() => changePage(item)}
                 style={{ color: 'black' }}
               >
                 {item}
-              </a>
+              </i>
             </Pagination.Item>
           ))}
           <Pagination.Item>
-            <a href="#" onClick={nextPage} style={{ color: 'black' }}>
+            <i href="#" onClick={nextPage} style={{ color: 'black' }}>
               Next
-            </a>
+            </i>
           </Pagination.Item>
         </Pagination>
       </div>

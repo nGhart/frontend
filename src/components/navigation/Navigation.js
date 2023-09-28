@@ -21,7 +21,7 @@ const Navigation = () => {
     <div className="navSection">
       <div className="logo">
         <Link to="/" className="listItem">
-          <span>records</span>
+          <span className="font3">records</span>
         </Link>
       </div>
       <div className="icons">

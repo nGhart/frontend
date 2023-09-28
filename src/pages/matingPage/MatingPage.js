@@ -4,7 +4,6 @@ import Matings from '../../contents/matingRecords/Matings';
 import matingStore from '../../stores/matingStore';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row';
 
 const MatingPage = () => {
   const store = matingStore();
@@ -29,13 +28,9 @@ const MatingPage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Matings />
-          </div>
-        </Row>
-      </Container>
+      <div className="tableContainer">
+        <Matings />
+      </div>
     </div>
   );
 };

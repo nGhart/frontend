@@ -4,7 +4,6 @@ import Diseases from '../../contents/disease/Diseases';
 import diseaseStore from '../../stores/diseaseStore';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row';
 
 const DiseasePage = () => {
   const store = diseaseStore();
@@ -29,13 +28,9 @@ const DiseasePage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Diseases />
-          </div>
-        </Row>
-      </Container>
+      <div>
+        <Diseases />
+      </div>
     </div>
   );
 };

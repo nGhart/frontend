@@ -33,13 +33,9 @@ const TransactionPage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Transactions />
-          </div>
-        </Row>
-      </Container>
+      <div className="tableContainer">
+        <Transactions />
+      </div>
     </div>
   );
 };

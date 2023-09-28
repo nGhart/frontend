@@ -4,7 +4,6 @@ import Meds from '../../contents/medication/Meds';
 import medStore from '../../stores/medStore';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row';
 
 const MedPage = () => {
   const store = medStore();
@@ -29,13 +28,9 @@ const MedPage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Meds />
-          </div>
-        </Row>
-      </Container>
+      <div className="tableContainer">
+        <Meds />
+      </div>
     </div>
   );
 };

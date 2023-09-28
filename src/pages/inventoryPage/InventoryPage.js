@@ -4,7 +4,6 @@ import Inventories from '../../contents/inventory/Inventories';
 import inventoryStore from '../../stores/inventoryStore';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import Row from 'react-bootstrap/Row';
 
 const InventoryPage = () => {
   const store = inventoryStore();
@@ -30,13 +29,9 @@ const InventoryPage = () => {
           </Container>
         </Navbar>
       </header>
-      <Container style={{ marginTop: '10px' }}>
-        <Row>
-          <div>
-            <Inventories />
-          </div>
-        </Row>
-      </Container>
+      <div className="tableContainer">
+        <Inventories />
+      </div>
     </div>
   );
 };

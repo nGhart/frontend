@@ -53,7 +53,7 @@ const AddVaccination = () => {
               <Form.Label>Next Date *</Form.Label>
               <Form.Control
                 required
-                type="date"
+                type="number"
                 name="nextDate"
                 onChange={store.updateCreateVaccinations}
                 value={store.createVaccination.nextDate}

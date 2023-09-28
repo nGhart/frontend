@@ -45,10 +45,10 @@ const Layout = () => {
       <Navigation />
       <div
         className="midSection"
-        // style={{
-        //   minHeight: 'calc(100vh-106px)',
-        //   maxHeight: 'calc(100vh-106px)',
-        // }}
+        style={{
+          minHeight: 'calc(100vh-106px)',
+          maxHeight: 'calc(100vh-106px)',
+        }}
       >
         <div className="menuSection">
           <Menu />

@@ -13,9 +13,11 @@ a {
 .mainSection {
   background-color: $main-bg;
   color: $main-color;
+  min-width: 1200px;
 }
 .midSection {
   display: flex;
+  padding-top: 60px;
 }
 .menuSection {
   width: 250px;
@@ -27,8 +29,10 @@ a {
 }
 .contentSection {
   padding: 5px 20px;
-  width: 100%;
   display: flex;
+  width: 100%;
   justify-content: center;
-  // width: calc(100vw-250px);
+}
+.tableContainer {
+  height: 510px;
 }
