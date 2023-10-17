@@ -2,9 +2,9 @@
 .reminderSection {
   .to-do-app {
     width: 100%;
-    background-color: rgba(9, 88, 72, 0.615);
-    border: 2px solid rgb(8, 49, 41);
-    border-radius: 10px;
+    //background-color: rgba(9, 88, 72, 0.615);
+    //border: 2px solid rgb(8, 49, 41);
+    //border-radius: 10px;
     display: flex;
     justify-content: center;
     color: #fff;
@@ -77,9 +77,9 @@
         visibility: visible;
       }
       .todoContainer {
-        max-height: 535px;
+        max-height: 490px;
         overflow-block: 490px;
-        overflow: scroll;
+        overflow-y: scroll;
       }
       .editIcon,
       .deleteIcon {
