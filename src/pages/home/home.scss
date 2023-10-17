@@ -1,3 +1,4 @@
+
 @import '../../styles/variables.scss';
 @import '../../styles/responsive.scss';
 
@@ -8,6 +9,7 @@
   grid-auto-rows: minmax(180px, auto);
   margin-bottom: 10px;
   text-align: center;
+  font-weight: 700 !important;
 
   @include xl {
     grid-template-columns: repeat(3, 1fr);
@@ -22,6 +24,9 @@
   .box {
     border-radius: 10px;
     border: 1px solid $deep-bg;
+    background-color: rgba(255, 255, 255, 0.724);
+    background-color: rgba(255, 255, 255, 0.473);
+    box-shadow: 0 4px 8px 0 $deep-bg, 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
   .box2 {
     height: 100%;
@@ -32,6 +37,7 @@
     grid-column: span 1;
     grid-row: span 3;
     padding: 0;
+    background: $lin-grad;
   }
   .box6 {
     display: flex;
